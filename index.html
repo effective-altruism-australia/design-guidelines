@@ -81,7 +81,7 @@
             box-sizing: border-box;
         }
         .white-logo { 
-            background-color: #151515; 
+            background-color: #000000; 
             border-radius: 4px;
         }
         .card h3 { 
@@ -97,7 +97,7 @@
     <div class="container">
         <h1>Effective Altruism Australia Design Guidelines</h1>
 
-    <h2>Color Palette</h2>
+    <h2>Colour Palette</h2>
     <div class="gallery">
         <div class="card">
             <div style="width: 100%; height: 120px; background-color: #0C869B; border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#0C869B</div>
@@ -117,7 +117,7 @@
             <div style="width: 100%; height: 120px; background-color: #F4EFE9; border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd;">#F4EFE9</div>
             <h3>Warm Off-White</h3>
             <p><strong>Usage:</strong> Page backgrounds, subtle sections</p>
-            <p class="good">✓ Use as primary background color</p>
+            <p class="good">✓ Use as primary background colour</p>
             <p class="bad">✗ Don't use for text or small elements</p>
         </div>
         <div class="card">
@@ -137,7 +137,7 @@
         <div class="card">
             <h3>Utilities</h3>
             <div style="margin: 15px 0;">
-                <button onclick="copyAllColors()" style="background: #0C869B; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px; font-size: 0.9rem;">Copy All Colors</button>
+                <button onclick="copyAllColours()" style="background: #0C869B; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px; font-size: 0.9rem;">Copy All Colours</button>
                 <button onclick="copyCSS()" style="background: #025159; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Copy CSS Variables</button>
             </div>
             <div style="font-size: 0.8rem; background: #eeeeee; padding: 12px; border-radius: 4px; margin-top: 10px;">
@@ -159,11 +159,11 @@
                         status.textContent = '';
                     }, 2000);
                 }
-                
-                function copyAllColors() {
-                    const colors = '#0C869B, #025159, #F4EFE9, #151515, #FFFFFF';
-                    navigator.clipboard.writeText(colors).then(() => {
-                        showStatus('✓ All colors copied to clipboard!');
+
+                function copyAllColours() {
+                    const colours = '#0C869B, #025159, #F4EFE9, #151515, #FFFFFF';
+                    navigator.clipboard.writeText(colours).then(() => {
+                        showStatus('✓ All colours copied to clipboard!');
                     });
                 }
                 function copyCSS() {
@@ -173,23 +173,23 @@
                     });
                 }
                 function copyFormat(format) {
-                    let colors;
+                    let colours;
                     switch(format) {
                         case 'hex':
-                            colors = '#0C869B, #025159, #F4EFE9, #151515, #FFFFFF';
+                            colours = '#0C869B, #025159, #F4EFE9, #151515, #FFFFFF';
                             break;
                         case 'rgb':
-                            colors = 'rgb(12,134,155), rgb(2,81,89), rgb(244,239,233), rgb(21,21,21), rgb(255,255,255)';
+                            colours = 'rgb(12,134,155), rgb(2,81,89), rgb(244,239,233), rgb(21,21,21), rgb(255,255,255)';
                             break;
                         case 'rgba':
-                            colors = 'rgba(12,134,155,1), rgba(2,81,89,1), rgba(244,239,233,1), rgba(21,21,21,1), rgba(255,255,255,1)';
+                            colours = 'rgba(12,134,155,1), rgba(2,81,89,1), rgba(244,239,233,1), rgba(21,21,21,1), rgba(255,255,255,1)';
                             break;
                         case 'hsl':
-                            colors = 'hsl(188,86%,33%), hsl(189,96%,18%), hsl(39,31%,94%), hsl(0,0%,8%), hsl(0,0%,100%)';
+                            colours = 'hsl(188,86%,33%), hsl(189,96%,18%), hsl(39,31%,94%), hsl(0,0%,8%), hsl(0,0%,100%)';
                             break;
                     }
-                    navigator.clipboard.writeText(colors).then(() => {
-                        showStatus(`✓ ${format.toUpperCase()} colors copied to clipboard!`);
+                    navigator.clipboard.writeText(colours).then(() => {
+                        showStatus(`✓ ${format.toUpperCase()} colours copied to clipboard!`);
                     });
                 }
             </script>
@@ -224,34 +224,39 @@
     <h2>Logo Variations</h2>
     <div class="gallery">
         <div class="card">
-            <img src="square-logo-full-color.png" alt="Square logo - Full color">
-            <h3>Square logo - Full color</h3>
+            <img src="square-logo-full-colour.png" alt="Square logo - Full colour">
+            <h3>Square logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
-            <p class="bad">✗ Avoid on colored backgrounds that conflict</p>
+            <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
+            <p><a href="square-logo-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="square-logo-mono-color.png" alt="Square logo - Mono color">
-            <h3>Square logo - Mono color</h3>
+            <img src="square-logo-mono-colour.png" alt="Square logo - Mono colour">
+            <h3>Square logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
+            <p><a href="square-logo-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
             <img src="square-logo-black.png" alt="Square logo - Black">
             <h3>Square logo - Black</h3>
             <p class="good">✓ Use on light backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on dark backgrounds</p>
+            <p><a href="square-logo-black.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-black.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
             <img src="square-logo-white.png" alt="Square logo - White" class="white-logo">
             <h3>Square logo - White</h3>
             <p class="good">✓ Use on dark backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on light backgrounds</p>
+            <p><a href="square-logo-white.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-white.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="square-logo-inverted-mono-color.png" alt="Square logo - Inverted mono color">
-            <h3>Square logo - Inverted mono color</h3>
+            <img src="square-logo-inverted-mono-colour.png" alt="Square logo - Inverted mono colour">
+            <h3>Square logo - Inverted mono colour</h3>
             <p class="good">✓ Use for social media avatars etc.</p>
             <p class="bad">✗ Don't use in other cases where full colour logo is an option</p>
+            <p><a href="square-logo-inverted-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-inverted-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
     </div>
 
@@ -259,28 +264,32 @@
     <h2>Large Format Logos</h2>
     <div class="gallery">
         <div class="card">
-            <img src="large-logo-full-color.png" alt="Large logo - Full color">
+            <img src="large-logo-full-colour.png" alt="Large logo - Full colour">
             <h3>Large logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
-            <p class="bad">✗ Avoid on colored backgrounds that conflict</p>
+            <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
+            <p><a href="large-logo-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="large-logo-mono-color.png" alt="Large logo - Mono color">
+            <img src="large-logo-mono-colour.png" alt="Large logo - Mono colour">
             <h3>Large logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Try to use the full colour version if you can</p>
+            <p><a href="large-logo-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="large-logo-full-color-dark.png" alt="Large logo - Full color dark" class="white-logo">
+            <img src="large-logo-full-colour-dark.png" alt="Large logo - Full colour dark" class="white-logo">
             <h3>Large logo - Full colour dark</h3>
             <p class="good">✓ Use for large displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on on light backgrounds or in small sizes - the gradient on the bulb will get lost in the background</p>
+            <p><a href="large-logo-full-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-full-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="large-logo-mono-color-dark.png" alt="Large logo - Mono color dark" class="white-logo">
+            <img src="large-logo-mono-colour-dark.png" alt="Large logo - Mono colour dark" class="white-logo">
             <h3>Large logo - Mono colour dark</h3>
             <p class="good">✓ Use for smaller displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on light backgrounds</p>
+            <p><a href="large-logo-mono-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-mono-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
     </div>
 
@@ -289,62 +298,71 @@
     <h2>Environmental Logo Variations</h2>
     <div class="gallery">
         <div class="card">
-            <img src="square-logo-env-full-color.png" alt="Square logo (env) - Full color">
-            <h3>Square logo - Full color</h3>
+            <img src="square-logo-env-full-colour.png" alt="Square logo (env) - Full colour">
+            <h3>Square logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
-            <p class="bad">✗ Avoid on colored backgrounds that conflict</p>
+            <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
+            <p><a href="square-logo-env-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="square-logo-env-mono-color.png" alt="Square logo (env) - Mono color">
-            <h3>Square logo - Mono color</h3>
+            <img src="square-logo-env-mono-colour.png" alt="Square logo (env) - Mono colour">
+            <h3>Square logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
+            <p><a href="square-logo-env-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
             <img src="square-logo-env-black.png" alt="Square logo (env) - Black">
             <h3>Square logo - Black</h3>
             <p class="good">✓ Use on light backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on dark backgrounds</p>
+            <p><a href="square-logo-env-black.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-black.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
             <img src="square-logo-env-white.png" alt="Square logo (env) - White" class="white-logo">
             <h3>Square logo - White</h3>
             <p class="good">✓ Use on dark backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on light backgrounds</p>
+            <p><a href="square-logo-env-white.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-white.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="square-logo-env-inverted-mono-color.png" alt="Square logo (env) - Inverted mono color">
-            <h3>Square logo - Inverted mono color</h3>
+            <img src="square-logo-env-inverted-mono-colour.png" alt="Square logo (env) - Inverted mono colour">
+            <h3>Square logo - Inverted mono colour</h3>
             <p class="good">✓ Use for social media avatars etc.</p>
             <p class="bad">✗ Don't use in other cases where full colour logo is an option</p>
+            <p><a href="square-logo-env-inverted-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-inverted-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
     </div>
 
     <h2>Environmental Large Format Logos</h2>
     <div class="gallery">
         <div class="card">
-            <img src="large-logo-env-full-color.png" alt="Large logo (env) - Full color">
+            <img src="large-logo-env-full-colour.png" alt="Large logo (env) - Full colour">
             <h3>Large logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
-            <p class="bad">✗ Avoid on colored backgrounds that conflict</p>
+            <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
+            <p><a href="large-logo-env-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-env-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="large-logo-env-mono-color.png" alt="Large logo (env) - Mono color">
+            <img src="large-logo-env-mono-colour.png" alt="Large logo (env) - Mono colour">
             <h3>Large logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
+            <p><a href="large-logo-env-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-env-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="large-logo-env-full-color-dark.png" alt="Large logo (env) - Full color dark" class="white-logo">
+            <img src="large-logo-env-full-colour-dark.png" alt="Large logo (env) - Full colour dark" class="white-logo">
             <h3>Large logo - Full colour dark</h3>
             <p class="good">✓ Use for large displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on on light backgrounds or in small sizes - the gradient on the bulb will get lost in the background</p>
+            <p><a href="large-logo-env-full-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-env-full-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
         <div class="card">
-            <img src="large-logo-env-mono-color-dark.png" alt="Large logo (env) - Mono color dark" class="white-logo">
+            <img src="large-logo-env-mono-colour-dark.png" alt="Large logo (env) - Mono colour dark" class="white-logo">
             <h3>Large logo - Mono colour dark</h3>
             <p class="good">✓ Use for smaller displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on light backgrounds</p>
+            <p><a href="large-logo-env-mono-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-env-mono-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
         </div>
     </div>
 
