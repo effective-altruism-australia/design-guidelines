@@ -20,11 +20,18 @@
             font-family: 'Merriweather', serif;
         }
         h1 { 
-            text-align: center; 
-            margin-bottom: 60px; 
+            text-align: left; 
+            margin-bottom: 8px; 
             color: #025159; 
             font-weight: 600; 
             font-size: 2.5rem;
+        }
+        .subtitle {
+            font-family: 'Mukta', Arial, sans-serif;
+            font-size: 1.2rem;
+            color: #025159;
+            margin-bottom: 60px;
+            font-weight: 400;
         }
         h2 { 
             color: #025159; 
@@ -43,7 +50,7 @@
             background: #FFFFFF; 
             padding: 20px; 
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            border-radius: 16px;
         }
         .bad-example-card {
             position: relative;
@@ -76,13 +83,13 @@
             height: auto; 
             max-height: 200px;
             margin-bottom: 16px; 
-            border-radius: 4px;
+            border-radius: 8px;
             border: 1px solid #ddd;
             box-sizing: border-box;
         }
         .white-logo { 
             background-color: #000000; 
-            border-radius: 4px;
+            border-radius: 8px;
         }
         .card h3 { 
             margin: 0 0 12px 0; 
@@ -91,44 +98,90 @@
         }
         .good { color: #0a5c2b; font-weight: 500; }
         .bad { color: #c53030; font-weight: 500; }
+        .download-link {
+            position: relative;
+            display: inline-block;
+        }
+        .download-link .tooltip {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+        .download-link .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .download-link:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Effective Altruism Australia Design Guidelines</h1>
+        <h1>Design Guidelines</h1>
+        <div class="subtitle">Effective Altruism Australia</div>
+
+        <div style="text-align: left; margin-bottom: 40px;">
+            <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                <a href="https://www.figma.com/design/DzCzJ9A9siHWKl7HtVvGKG/EAA-Design-Guidelines" target="_blank" style="color: #666; text-decoration: underline; font-weight: 400; display: inline-flex; align-items: center; gap: 6px;">
+                    <img src="Figma-logo.svg" alt="Figma" style="width: 14px; height: 14px; opacity: 0.7;">
+                    Edit in Figma
+                </a>
+            </p>
+        </div>
 
     <h2>Colour Palette</h2>
     <div class="gallery">
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #0C869B; border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#0C869B</div>
+            <div style="width: 100%; height: 120px; background-color: #0C869B; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#0C869B</div>
             <h3>Primary Teal</h3>
             <p><strong>Usage:</strong> Accents, buttons, links, highlights</p>
             <p class="good">✓ Use for interactive elements and brand accents</p>
             <p class="bad">✗ Don't use as a background for large areas</p>
         </div>
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #025159; border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#025159</div>
+            <div style="width: 100%; height: 120px; background-color: #025159; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#025159</div>
             <h3>Dark Teal</h3>
             <p><strong>Usage:</strong> Headings, dark text, navigation</p>
             <p class="good">✓ Use for headings and important text elements</p>
             <p class="bad">✗ Don't use on dark backgrounds without sufficient contrast</p>
         </div>
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #F4EFE9; border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd;">#F4EFE9</div>
+            <div style="width: 100%; height: 120px; background-color: #F4EFE9; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd;">#F4EFE9</div>
             <h3>Warm Off-White</h3>
             <p><strong>Usage:</strong> Page backgrounds, subtle sections</p>
             <p class="good">✓ Use as primary background colour</p>
             <p class="bad">✗ Don't use for text or small elements</p>
         </div>
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #151515; border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#151515</div>
+            <div style="width: 100%; height: 120px; background-color: #151515; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#151515</div>
             <h3>Charcoal Black</h3>
             <p><strong>Usage:</strong> Body text, primary content</p>
             <p class="good">✓ Use for main body text and content</p>
             <p class="bad">✗ Don't use as background without white text</p>
         </div>
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #FFFFFF; border-radius: 4px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd;">#FFFFFF</div>
+            <div style="width: 100%; height: 120px; background-color: #FFFFFF; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd;">#FFFFFF</div>
             <h3>Pure White</h3>
             <p><strong>Usage:</strong> Card backgrounds, content areas</p>
             <p class="good">✓ Use for content cards and clean backgrounds</p>
@@ -137,18 +190,18 @@
         <div class="card">
             <h3>Utilities</h3>
             <div style="margin: 15px 0;">
-                <button onclick="copyAllColours()" style="background: #0C869B; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px; font-size: 0.9rem;">Copy All Colours</button>
+                <button onclick="copyAllColours()" style="background: #0C869B; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px; font-size: 0.9rem;">Copy HEX</button>
                 <button onclick="copyCSS()" style="background: #025159; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Copy CSS Variables</button>
             </div>
-            <div style="font-size: 0.8rem; background: #eeeeee; padding: 12px; border-radius: 4px; margin-top: 10px;">
-                <strong>HEX:</strong> #0C869B, #025159, #F4EFE9, #151515, #FFFFFF<br>
-                <strong>RGB:</strong> 12,134,155 | 2,81,89 | 244,239,233 | 21,21,21 | 255,255,255<br>
+            <div style="font-size: 0.8rem; background: #f3f3f3; padding: 12px; border-radius: 4px; margin-top: 10px;">
+                <strong>HEX:</strong> #0C869B, #025159, #F4EFE9, #151515, #FFFFFF<br><br>
+                <strong>RGB:</strong> 12,134,155 | 2,81,89 | 244,239,233 | 21,21,21 | 255,255,255<br><br>
                 <strong>HSL:</strong> 188°,86%,33% | 189°,96%,18% | 39°,31%,94% | 0°,0%,8% | 0°,0%,100%
             </div>
             <div style="margin-top: 10px;">
-                <button onclick="copyFormat('rgb')" style="background: #eeeeee; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 6px; font-size: 0.8rem;">Copy RGB</button>
-                <button onclick="copyFormat('rgba')" style="background: #eeeeee; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 6px; font-size: 0.8rem;">Copy RGBA</button>
-                <button onclick="copyFormat('hsl')" style="background: #eeeeee; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Copy HSL</button>
+                <button onclick="copyFormat('rgb')" style="background: #f3f3f3; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 6px; font-size: 0.8rem;">Copy RGB</button>
+                <button onclick="copyFormat('rgba')" style="background: #f3f3f3; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 6px; font-size: 0.8rem;">Copy RGBA</button>
+                <button onclick="copyFormat('hsl')" style="background: #f3f3f3; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Copy HSL</button>
             </div>
             <div id="copyStatus" style="font-size: 0.8rem; color: #0C869B; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
             <script>
@@ -163,7 +216,7 @@
                 function copyAllColours() {
                     const colours = '#0C869B, #025159, #F4EFE9, #151515, #FFFFFF';
                     navigator.clipboard.writeText(colours).then(() => {
-                        showStatus('✓ All colours copied to clipboard!');
+                        showStatus('✓ HEX colours copied to clipboard!');
                     });
                 }
                 function copyCSS() {
@@ -228,35 +281,48 @@
             <h3>Square logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
             <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
-            <p><a href="square-logo-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p>
+                <span class="download-link">
+                    <a href="square-logo-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a>
+                    <span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span>
+                </span> | 
+                <span class="download-link">
+                    <a href="square-logo-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a>
+                    <span class="tooltip">Best for presentations, documents, and email where compatibility is key</span>
+                </span> | 
+                <span class="download-link">
+                    <a href="square-logo-full-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a>
+                    <span class="tooltip">Best for tight layouts where you need precise control over spacing</span>
+                </span>
+            </p>
         </div>
         <div class="card">
             <img src="square-logo-mono-colour.png" alt="Square logo - Mono colour">
             <h3>Square logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
-            <p><a href="square-logo-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-mono-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-black.png" alt="Square logo - Black">
             <h3>Square logo - Black</h3>
             <p class="good">✓ Use on light backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on dark backgrounds</p>
-            <p><a href="square-logo-black.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-black.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-black.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-black.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-black-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-white.png" alt="Square logo - White" class="white-logo">
             <h3>Square logo - White</h3>
             <p class="good">✓ Use on dark backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on light backgrounds</p>
-            <p><a href="square-logo-white.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-white.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-white.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-white.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-white-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-inverted-mono-colour.png" alt="Square logo - Inverted mono colour">
             <h3>Square logo - Inverted mono colour</h3>
             <p class="good">✓ Use for social media avatars etc.</p>
             <p class="bad">✗ Don't use in other cases where full colour logo is an option</p>
-            <p><a href="square-logo-inverted-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-inverted-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-inverted-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-inverted-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span></p>
         </div>
     </div>
 
@@ -268,28 +334,28 @@
             <h3>Large logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
             <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
-            <p><a href="large-logo-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="large-logo-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-full-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-mono-colour.png" alt="Large logo - Mono colour">
             <h3>Large logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Try to use the full colour version if you can</p>
-            <p><a href="large-logo-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="large-logo-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-mono-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-full-colour-dark.png" alt="Large logo - Full colour dark" class="white-logo">
             <h3>Large logo - Full colour dark</h3>
             <p class="good">✓ Use for large displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on on light backgrounds or in small sizes - the gradient on the bulb will get lost in the background</p>
-            <p><a href="large-logo-full-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-full-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="large-logo-full-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-full-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-full-colour-dark-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-mono-colour-dark.png" alt="Large logo - Mono colour dark" class="white-logo">
             <h3>Large logo - Mono colour dark</h3>
             <p class="good">✓ Use for smaller displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on light backgrounds</p>
-            <p><a href="large-logo-mono-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-mono-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="large-logo-mono-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-mono-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-mono-colour-dark-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
     </div>
 
@@ -302,35 +368,35 @@
             <h3>Square logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
             <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
-            <p><a href="square-logo-env-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-env-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-env-full-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-env-mono-colour.png" alt="Square logo (env) - Mono colour">
             <h3>Square logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
-            <p><a href="square-logo-env-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-env-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-env-mono-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-env-black.png" alt="Square logo (env) - Black">
             <h3>Square logo - Black</h3>
             <p class="good">✓ Use on light backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on dark backgrounds</p>
-            <p><a href="square-logo-env-black.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-black.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-env-black.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-black.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-env-black-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-env-white.png" alt="Square logo (env) - White" class="white-logo">
             <h3>Square logo - White</h3>
             <p class="good">✓ Use on dark backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on light backgrounds</p>
-            <p><a href="square-logo-env-white.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-white.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-env-white.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-white.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-env-white-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-env-inverted-mono-colour.png" alt="Square logo (env) - Inverted mono colour">
             <h3>Square logo - Inverted mono colour</h3>
             <p class="good">✓ Use for social media avatars etc.</p>
             <p class="bad">✗ Don't use in other cases where full colour logo is an option</p>
-            <p><a href="square-logo-env-inverted-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="square-logo-env-inverted-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="square-logo-env-inverted-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-inverted-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span></p>
         </div>
     </div>
 
@@ -341,28 +407,28 @@
             <h3>Large logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
             <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
-            <p><a href="large-logo-env-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-env-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="large-logo-env-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-env-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-env-full-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-env-mono-colour.png" alt="Large logo (env) - Mono colour">
             <h3>Large logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
-            <p><a href="large-logo-env-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-env-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="large-logo-env-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-env-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-env-mono-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-env-full-colour-dark.png" alt="Large logo (env) - Full colour dark" class="white-logo">
             <h3>Large logo - Full colour dark</h3>
             <p class="good">✓ Use for large displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on on light backgrounds or in small sizes - the gradient on the bulb will get lost in the background</p>
-            <p><a href="large-logo-env-full-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-env-full-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="large-logo-env-full-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-env-full-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-env-full-colour-dark-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-env-mono-colour-dark.png" alt="Large logo (env) - Mono colour dark" class="white-logo">
             <h3>Large logo - Mono colour dark</h3>
             <p class="good">✓ Use for smaller displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on light backgrounds</p>
-            <p><a href="large-logo-env-mono-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a> | <a href="large-logo-env-mono-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a></p>
+            <p><span class="download-link"><a href="large-logo-env-mono-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-env-mono-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-env-mono-colour-dark-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
     </div>
 
