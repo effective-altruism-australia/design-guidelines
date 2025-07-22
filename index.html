@@ -30,7 +30,7 @@
             font-family: 'Mukta', Arial, sans-serif;
             font-size: 1.2rem;
             color: #025159;
-            margin-bottom: 60px;
+            margin-bottom: 30px;
             font-weight: 400;
         }
         h2 { 
@@ -134,20 +134,87 @@
             visibility: visible;
             opacity: 1;
         }
+        
+        /* Hide print-only elements on screen */
+        .print-only-url {
+            display: none;
+        }
+        
+        /* Print styles for clean PDF output */
+        @media print {
+            h2 {
+                page-break-before: always;
+                break-before: page;
+                padding-top: 40px;
+            }
+            
+            /* Ensure first section doesn't have a page break */
+            h2:first-of-type {
+                page-break-before: auto;
+                break-before: auto;
+                padding-top: 0;
+            }
+            
+            /* Prevent breaking inside cards */
+            .card {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            /* Hide tooltips in print */
+            .tooltip {
+                display: none;
+            }
+            
+            /* Hide utilities card with interactive elements */
+            .utilities-card {
+                display: none;
+            }
+            
+            /* Show print-only URL message */
+            .print-only-url {
+                display: block;
+                border-top: 1px solid #ddd;
+                padding: 8px 0;
+                margin: 20px 0;
+                font-size: 0.8rem;
+                color: #666;
+                text-align: left;
+            }
+            
+            /* Better print margins */
+            body {
+                margin: 0.5in;
+            }
+            
+            /* Ensure good contrast for print */
+            .bad-example-card::before {
+                opacity: 1 !important;
+                transform: scale(1) !important;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Design Guidelines</h1>
         <div class="subtitle">Effective Altruism Australia</div>
-
-        <div style="text-align: left; margin-bottom: 40px;">
+        
+        <div style="text-align: left; margin-bottom: 8px; color: #666; font-size: 0.9rem;">
+            Last updated: 22 July 2025
+        </div>
+        
+        <div style="text-align: left; margin-bottom: 50px;">
             <p style="margin: 0; font-size: 0.9rem; color: #666;">
                 <a href="https://www.figma.com/design/DzCzJ9A9siHWKl7HtVvGKG/EAA-Design-Guidelines" target="_blank" style="color: #666; text-decoration: underline; font-weight: 400; display: inline-flex; align-items: center; gap: 6px;">
                     <img src="Figma-logo.svg" alt="Figma" style="width: 14px; height: 14px; opacity: 0.7;">
                     Edit in Figma
                 </a>
             </p>
+        </div>
+        
+        <div class="print-only-url">
+            To get the latest version visit: https://effective-altruism-australia.github.io/design-guidelines/
         </div>
 
     <h2>Colour Palette</h2>
@@ -187,7 +254,7 @@
             <p class="good">✓ Use for content cards and clean backgrounds</p>
             <p class="bad">✗ Don't use for text on light backgrounds</p>
         </div>
-        <div class="card">
+        <div class="card utilities-card">
             <h3>Utilities</h3>
             <div style="margin: 15px 0;">
                 <button onclick="copyAllColours()" style="background: #0C869B; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px; font-size: 0.9rem;">Copy HEX</button>
