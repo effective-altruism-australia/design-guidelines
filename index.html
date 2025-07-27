@@ -6,45 +6,146 @@
     <title>EAA Design Guidelines</title>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600&family=Mukta:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 20px;
+        }
         body { 
             font-family: 'Mukta', Arial, sans-serif; 
             font-weight: 400;
             margin: 0; 
-            padding: 40px 20px; 
-            background-color: #faf9f8; 
+            padding: 0; 
+            background-color: #f9f6f3; 
             color: #151515; 
             line-height: 1.5;
         }
         .container { max-width: 1200px; margin: 0 auto; }
+        .main-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .quick-nav {
+            padding: 20px;
+            width: 220px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 10px;
+            height: fit-content;
+            box-sizing: border-box;
+        }
+        .quick-nav h3 {
+            margin: 0 0 15px 0;
+            font-size: 1rem;
+            color: #145565;
+        }
+        .quick-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .quick-nav li {
+            margin-bottom: 8px;
+        }
+        .quick-nav a {
+            color: #145565;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 6px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .quick-nav a:hover {
+            background-color: #F4EFE9;
+        }
+        .main-content {
+            padding: 20px;
+            flex: 1;
+            min-width: 0;
+        }
+        .header-section {
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .quick-nav {
+                position: static;
+                width: 100%;
+                order: -1;
+            }
+            .header-section > div:first-child {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+            .header-section > div:first-child > div:last-child {
+                text-align: left !important;
+                margin-top: 15px;
+                width: 100%;
+            }
+        }
         h1, h2, h3 { 
             font-family: 'Merriweather', serif;
         }
         h1 { 
             text-align: left; 
+            margin-top: 0px;
             margin-bottom: 8px; 
-            color: #025159; 
+            color: #145565; 
             font-weight: 600; 
             font-size: 2.5rem;
         }
         .subtitle {
             font-family: 'Mukta', Arial, sans-serif;
             font-size: 1.2rem;
-            color: #025159;
+            color: #145565;
             margin-bottom: 30px;
             font-weight: 400;
         }
         h2 { 
-            color: #025159; 
-            border-bottom: 3px solid #0C869B; 
+            color: #145565; 
+            border-bottom: 1px solid #145565; 
             padding-bottom: 12px; 
             margin: 60px 0 30px 0; 
             font-weight: 400;
         }
+        h2:first-of-type {
+            margin-top: 0;
+        }
         .gallery { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            grid-template-columns: repeat(3, 1fr); 
             gap: 24px; 
             margin-bottom: 40px;
+        }
+        @media (max-width: 900px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+        .color-swatches {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin: 16px 0;
+        }
+        @media (max-width: 900px) {
+            .color-swatches {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .color-swatches {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         .card { 
             background: #FFFFFF; 
@@ -64,14 +165,16 @@
             position: absolute;
             top: -1px;
             right: -1px;
-            background: #e53e3e;
+            background: #ce1010;
+            box-sizing: border-box;
+            width: 100%;
             color: white;
             padding: 4px 8px;
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             font-weight: bold;
-            border-radius: 0 8px 0 8px;
+            border-radius: 8px 8px 0 0 ;
             opacity: 0;
-            transform: scale(0.8);
+            transform: translate(0, -10px);
             transition: all 0.3s ease;
         }
         .bad-example-card:hover::before {
@@ -81,7 +184,7 @@
         .card img { 
             max-width: 100%; 
             height: auto; 
-            max-height: 200px;
+            max-height: 128px;
             margin-bottom: 16px; 
             border-radius: 8px;
             border: 1px solid #ddd;
@@ -93,7 +196,7 @@
         }
         .card h3 { 
             margin: 0 0 12px 0; 
-            color: #025159; 
+            color: #145565; 
             font-weight: 400;
         }
         .good { color: #0a5c2b; font-weight: 500; }
@@ -108,8 +211,8 @@
             background-color: #333;
             color: #fff;
             text-align: center;
-            border-radius: 6px;
-            padding: 8px;
+            border-radius: 24px;
+            padding: 12px 16px;
             position: absolute;
             z-index: 1;
             bottom: 125%;
@@ -117,7 +220,7 @@
             margin-left: -100px;
             opacity: 0;
             transition: opacity 0.3s;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 400;
         }
         .download-link .tooltip::after {
@@ -142,6 +245,24 @@
         
         /* Print styles for clean PDF output */
         @media print {
+            .quick-nav {
+                display: none;
+            }
+            .main-layout {
+                display: block;
+            }
+            .main-content {
+                width: 100%;
+                max-width: none;
+            }
+            .card {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .color-swatches {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
             h2 {
                 page-break-before: always;
                 break-before: page;
@@ -177,7 +298,7 @@
                 border-top: 1px solid #ddd;
                 padding: 8px 0;
                 margin: 20px 0;
-                font-size: 0.8rem;
+                font-size: 0.9rem;
                 color: #666;
                 text-align: left;
             }
@@ -197,80 +318,88 @@
 </head>
 <body>
     <div class="container">
-        <h1>Design Guidelines</h1>
-        <div class="subtitle">Effective Altruism Australia</div>
-        
-        <div style="text-align: left; margin-bottom: 8px; color: #666; font-size: 0.9rem;">
-            Last updated: 22 July 2025
+        <div class="header-section">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap;">
+                <div>
+                    <h1>Design Guidelines</h1>
+                    <div class="subtitle">Effective Altruism Australia</div>
+                </div>
+                <div style="text-align: right; padding: 10px; background: #f9f6f3; border-radius: 8px;">
+                    <div style="margin-bottom: 8px; color: #666; font-size: 0.9rem;">
+                        Last updated: 27 July 2025
+                    </div>
+                    <div>
+                        <a href="https://www.figma.com/design/DzCzJ9A9siHWKl7HtVvGKG/EAA-Design-Guidelines" target="_blank" style="color: #666; text-decoration: underline; font-weight: 400; display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem;">
+                            <img src="Figma-logo.svg" alt="Figma" style="width: 14px; height: 14px; opacity: 0.7;">
+                            Edit in Figma
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="print-only-url">
+                To get the latest version visit: https://effective-altruism-australia.github.io/design-guidelines/
+            </div>
         </div>
         
-        <div style="text-align: left; margin-bottom: 50px;">
-            <p style="margin: 0; font-size: 0.9rem; color: #666;">
-                <a href="https://www.figma.com/design/DzCzJ9A9siHWKl7HtVvGKG/EAA-Design-Guidelines" target="_blank" style="color: #666; text-decoration: underline; font-weight: 400; display: inline-flex; align-items: center; gap: 6px;">
-                    <img src="Figma-logo.svg" alt="Figma" style="width: 14px; height: 14px; opacity: 0.7;">
-                    Edit in Figma
-                </a>
-            </p>
-        </div>
-        
-        <div class="print-only-url">
-            To get the latest version visit: https://effective-altruism-australia.github.io/design-guidelines/
-        </div>
+        <div class="main-layout">
+            <nav class="quick-nav">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#colour-palette">Colour Palette</a></li>
+                    <li><a href="#typography">Typography</a></li>
+                    <li><a href="#logo-variations">Logo Variations</a></li>
+                    <li><a href="#large-format-logos">Large Format Logos</a></li>
+                    <li><a href="#environmental-logo-variations">Environmental Logo Variations</a></li>
+                    <li><a href="#environmental-large-format-logos">Environmental Large Format Logos</a></li>
+                    <li><a href="#bad-examples">Bad Examples</a></li>
+                </ul>
+            </nav>
+            
+            <div class="main-content">
 
-    <h2>Colour Palette</h2>
+    <h2 id="colour-palette">Colour Palette</h2>
     <div class="gallery">
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #0C869B; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#0C869B</div>
+            <div onclick="copyTopCardColor('#0C869B', 'Primary Teal')" style="width: 100%; height: 120px; background-color: #0C869B; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#0C869B</div>
             <h3>Primary Teal</h3>
-            <p><strong>Usage:</strong> Accents, buttons, links, highlights</p>
-            <p class="good">✓ Use for interactive elements and brand accents</p>
-            <p class="bad">✗ Don't use as a background for large areas</p>
+            <p><strong></strong> Accents, buttons, links, highlights</p>
+            <div id="primaryTealStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
         </div>
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #025159; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#025159</div>
+            <div onclick="copyTopCardColor('#145565', 'Dark Teal')" style="width: 100%; height: 120px; background-color: #145565; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#145565</div>
             <h3>Dark Teal</h3>
-            <p><strong>Usage:</strong> Headings, dark text, navigation</p>
-            <p class="good">✓ Use for headings and important text elements</p>
-            <p class="bad">✗ Don't use on dark backgrounds without sufficient contrast</p>
+            <p><strong></strong> Headings, dark text, navigation</p>
+            <div id="darkTealStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
         </div>
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #F4EFE9; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd;">#F4EFE9</div>
+            <div onclick="copyTopCardColor('#F4EFE9', 'Warm Off-White')" style="width: 100%; height: 120px; background-color: #F4EFE9; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#F4EFE9</div>
             <h3>Warm Off-White</h3>
-            <p><strong>Usage:</strong> Page backgrounds, subtle sections</p>
-            <p class="good">✓ Use as primary background colour</p>
-            <p class="bad">✗ Don't use for text or small elements</p>
+            <p><strong></strong> Page backgrounds, subtle sections</p>
+            <div id="warmOffWhiteStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
         </div>
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #151515; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">#151515</div>
+            <div onclick="copyTopCardColor('#151515', 'Charcoal Black')" style="width: 100%; height: 120px; background-color: #151515; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#151515</div>
             <h3>Charcoal Black</h3>
-            <p><strong>Usage:</strong> Body text, primary content</p>
-            <p class="good">✓ Use for main body text and content</p>
-            <p class="bad">✗ Don't use as background without white text</p>
+            <p><strong></strong> Body text, primary content</p>
+            <div id="charcoalBlackStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
         </div>
         <div class="card">
-            <div style="width: 100%; height: 120px; background-color: #FFFFFF; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd;">#FFFFFF</div>
+            <div onclick="copyTopCardColor('#FFFFFF', 'Pure White')" style="width: 100%; height: 120px; background-color: #FFFFFF; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#FFFFFF</div>
             <h3>Pure White</h3>
-            <p><strong>Usage:</strong> Card backgrounds, content areas</p>
-            <p class="good">✓ Use for content cards and clean backgrounds</p>
-            <p class="bad">✗ Don't use for text on light backgrounds</p>
+            <p><strong></strong> Card backgrounds, content areas</p>
+            <div id="pureWhiteStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
         </div>
         <div class="card utilities-card">
-            <h3>Utilities</h3>
-            <div style="margin: 15px 0;">
-                <button onclick="copyAllColours()" style="background: #0C869B; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px; font-size: 0.9rem;">Copy HEX</button>
-                <button onclick="copyCSS()" style="background: #025159; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Copy CSS Variables</button>
+            <h3>Copy 5 Main colours as:</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0;">
+                <button onclick="copyAllColours()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">HEX</button>
+                <button onclick="copyFormat('rgb')" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">RGB</button>
+                <button onclick="copyFormat('rgba')" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">RGBA</button>
+                <button onclick="copyFormat('hsl')" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">HSL</button>
+                <button onclick="copyCSS()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; grid-column: span 2;">CSS Variables</button>
             </div>
-            <div style="font-size: 0.8rem; background: #f3f3f3; padding: 12px; border-radius: 4px; margin-top: 10px;">
-                <strong>HEX:</strong> #0C869B, #025159, #F4EFE9, #151515, #FFFFFF<br><br>
-                <strong>RGB:</strong> 12,134,155 | 2,81,89 | 244,239,233 | 21,21,21 | 255,255,255<br><br>
-                <strong>HSL:</strong> 188°,86%,33% | 189°,96%,18% | 39°,31%,94% | 0°,0%,8% | 0°,0%,100%
-            </div>
-            <div style="margin-top: 10px;">
-                <button onclick="copyFormat('rgb')" style="background: #f3f3f3; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 6px; font-size: 0.8rem;">Copy RGB</button>
-                <button onclick="copyFormat('rgba')" style="background: #f3f3f3; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 6px; font-size: 0.8rem;">Copy RGBA</button>
-                <button onclick="copyFormat('hsl')" style="background: #f3f3f3; color: #151515; border: 1px solid #025159; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Copy HSL</button>
-            </div>
-            <div id="copyStatus" style="font-size: 0.8rem; color: #0C869B; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <div id="copyStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
             <script>
                 function showStatus(message) {
                     const status = document.getElementById('copyStatus');
@@ -280,14 +409,44 @@
                     }, 2000);
                 }
 
+                function copyTopCardColor(hex, colorName) {
+                    navigator.clipboard.writeText(hex).then(() => {
+                        let statusId;
+                        switch(colorName) {
+                            case 'Primary Teal':
+                                statusId = 'primaryTealStatus';
+                                break;
+                            case 'Dark Teal':
+                                statusId = 'darkTealStatus';
+                                break;
+                            case 'Warm Off-White':
+                                statusId = 'warmOffWhiteStatus';
+                                break;
+                            case 'Charcoal Black':
+                                statusId = 'charcoalBlackStatus';
+                                break;
+                            case 'Pure White':
+                                statusId = 'pureWhiteStatus';
+                                break;
+                            default:
+                                statusId = 'copyStatus';
+                        }
+                        const status = document.getElementById(statusId);
+                        status.textContent = `✓ ${colorName} (${hex}) copied!`;
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
                 function copyAllColours() {
-                    const colours = '#0C869B, #025159, #F4EFE9, #151515, #FFFFFF';
+                    const colours = '#0C869B, #145565, #F4EFE9, #151515, #FFFFFF';
                     navigator.clipboard.writeText(colours).then(() => {
                         showStatus('✓ HEX colours copied to clipboard!');
                     });
                 }
                 function copyCSS() {
-                    const css = ':root {\n  --primary-teal: #0C869B;\n  --dark-teal: #025159;\n  --warm-off-white: #F4EFE9;\n  --charcoal-black: #151515;\n  --pure-white: #FFFFFF;\n}';
+                    const css = ':root {\n  --primary-teal: #0C869B;\n  --dark-teal: #145565;\n  --warm-off-white: #F4EFE9;\n  --charcoal-black: #151515;\n  --pure-white: #FFFFFF;\n}';
                     navigator.clipboard.writeText(css).then(() => {
                         showStatus('✓ CSS variables copied to clipboard!');
                     });
@@ -296,7 +455,7 @@
                     let colours;
                     switch(format) {
                         case 'hex':
-                            colours = '#0C869B, #025159, #F4EFE9, #151515, #FFFFFF';
+                            colours = '#0C869B, #145565, #F4EFE9, #151515, #FFFFFF';
                             break;
                         case 'rgb':
                             colours = 'rgb(12,134,155), rgb(2,81,89), rgb(244,239,233), rgb(21,21,21), rgb(255,255,255)';
@@ -314,9 +473,417 @@
                 }
             </script>
         </div>
+        <div class="card" style="grid-column: 1 / -1;">
+            <h3>Teal</h3>
+            <div class="color-swatches">
+                <div onclick="copyEAATealColor('#ecffff', '50')" style="cursor: pointer; background-color: #ecffff; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">50</div>
+                    <div style="font-size: 0.75rem; color: #145565;">#ecffff</div>
+                </div>
+                <div onclick="copyEAATealColor('#cefeff', '100')" style="cursor: pointer; background-color: #cefeff; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">100</div>
+                    <div style="font-size: 0.75rem; color: #145565;">#cefeff</div>
+                </div>
+                <div onclick="copyEAATealColor('#a3fafe', '200')" style="cursor: pointer; background-color: #a3fafe; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">200</div>
+                    <div style="font-size: 0.75rem; color: #145565;">#a3fafe</div>
+                </div>
+                <div onclick="copyEAATealColor('#64f4fc', '300')" style="cursor: pointer; background-color: #64f4fc; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">300</div>
+                    <div style="font-size: 0.75rem; color: #145565;">#64f4fc</div>
+                </div>
+                <div onclick="copyEAATealColor('#1ee5f2', '400')" style="cursor: pointer; background-color: #1ee5f2; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">400</div>
+                    <div style="font-size: 0.75rem; color: #145565;">#1ee5f2</div>
+                </div>
+                <div onclick="copyEAATealColor('#02c8d8', '500')" style="cursor: pointer; background-color: #02c8d8; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">500</div>
+                    <div style="font-size: 0.75rem; color: white;">#02c8d8</div>
+                </div>
+                <div onclick="copyEAATealColor('#059fb5', '600')" style="cursor: pointer; background-color: #059fb5; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">600</div>
+                    <div style="font-size: 0.75rem; color: white;">#059fb5</div>
+                </div>
+                <div onclick="copyEAATealColor('#0c869b', '700')" style="cursor: pointer; background-color: #0c869b; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">700</div>
+                    <div style="font-size: 0.75rem; color: white;">#0c869b</div>
+                </div>
+                <div onclick="copyEAATealColor('#136677', '800')" style="cursor: pointer; background-color: #136677; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">800</div>
+                    <div style="font-size: 0.75rem; color: white;">#136677</div>
+                </div>
+                <div onclick="copyEAATealColor('#145565', '900')" style="cursor: pointer; background-color: #145565; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">900</div>
+                    <div style="font-size: 0.75rem; color: white;">#145565</div>
+                </div>
+                <div onclick="copyEAATealColor('#073845', '950')" style="cursor: pointer; background-color: #073845; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">950</div>
+                    <div style="font-size: 0.75rem; color: white;">#073845</div>
+                </div>
+            </div>
+            <hr style="border: none; height: 1px; background-color: #e0e0e0; margin: 20px 0;">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;">
+                <button onclick="copyAllEAATeal()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HEX</button>
+                <button onclick="copyEAATealRGB()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGB</button>
+                <button onclick="copyEAATealRGBA()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGBA</button>
+                <button onclick="copyEAATealHSL()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HSL</button>
+                <button onclick="copyEAATealCSS()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy CSS Variables</button>
+            </div>
+            <div id="eaaTealStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <script>
+                function copyEAATealColor(hex, variant) {
+                    navigator.clipboard.writeText(hex).then(() => {
+                        const status = document.getElementById('eaaTealStatus');
+                        status.textContent = `✓ EAA Teal ${variant} (${hex}) copied!`;
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyAllEAATeal() {
+                    const colors = '#ecffff, #cefeff, #a3fafe, #64f4fc, #1ee5f2, #02c8d8, #059fb5, #0c869b, #136677, #145565, #073845';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaTealStatus');
+                        status.textContent = '✓ All EAA Teal colors copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAATealCSS() {
+                    const css = `:root {
+  --color-eaa-teal-50: #ecffff;
+  --color-eaa-teal-100: #cefeff;
+  --color-eaa-teal-200: #a3fafe;
+  --color-eaa-teal-300: #64f4fc;
+  --color-eaa-teal-400: #1ee5f2;
+  --color-eaa-teal-500: #02c8d8;
+  --color-eaa-teal-600: #059fb5;
+  --color-eaa-teal-700: #0c869b;
+  --color-eaa-teal-800: #136677;
+  --color-eaa-teal-900: #145565;
+  --color-eaa-teal-950: #073845;
+}`;
+                    navigator.clipboard.writeText(css).then(() => {
+                        const status = document.getElementById('eaaTealStatus');
+                        status.textContent = '✓ CSS variables copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAATealRGB() {
+                    const colors = 'rgb(236,255,255), rgb(206,254,255), rgb(163,250,254), rgb(100,244,252), rgb(30,229,242), rgb(2,200,216), rgb(5,159,181), rgb(12,134,155), rgb(19,102,119), rgb(20,85,101), rgb(7,56,69)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaTealStatus');
+                        status.textContent = '✓ RGB values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAATealRGBA() {
+                    const colors = 'rgba(236,255,255,1), rgba(206,254,255,1), rgba(163,250,254,1), rgba(100,244,252,1), rgba(30,229,242,1), rgba(2,200,216,1), rgba(5,159,181,1), rgba(12,134,155,1), rgba(19,102,119,1), rgba(20,85,101,1), rgba(7,56,69,1)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaTealStatus');
+                        status.textContent = '✓ RGBA values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAATealHSL() {
+                    const colors = 'hsl(180,100%,96%), hsl(181,100%,90%), hsl(182,94%,82%), hsl(183,93%,69%), hsl(183,87%,53%), hsl(184,98%,43%), hsl(186,95%,36%), hsl(188,86%,33%), hsl(190,73%,27%), hsl(191,67%,24%), hsl(194,82%,15%)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaTealStatus');
+                        status.textContent = '✓ HSL values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+            </script>
+        </div>
+        <div class="card" style="grid-column: 1 / -1;">
+            <h3>Bronze</h3>
+            <div class="color-swatches">
+                <div onclick="copyEAAWarmColor('#f9f6f3', '50')" style="cursor: pointer; background-color: #f9f6f3; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">50</div>
+                    <div style="font-size: 0.75rem; color: #2f1e1b;">#f9f6f3</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#f4efe9', '100')" style="cursor: pointer; background-color: #f4efe9; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">100</div>
+                    <div style="font-size: 0.75rem; color: #2f1e1b;">#f4efe9</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#e2d4c6', '200')" style="cursor: pointer; background-color: #e2d4c6; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">200</div>
+                    <div style="font-size: 0.75rem; color: #2f1e1b;">#e2d4c6</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#cfb8a2', '300')" style="cursor: pointer; background-color: #cfb8a2; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">300</div>
+                    <div style="font-size: 0.75rem; color: #2f1e1b;">#cfb8a2</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#bb967c', '400')" style="cursor: pointer; background-color: #bb967c; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">400</div>
+                    <div style="font-size: 0.75rem; color: #2f1e1b;">#bb967c</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#ad7f62', '500')" style="cursor: pointer; background-color: #ad7f62; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">500</div>
+                    <div style="font-size: 0.75rem; color: white;">#ad7f62</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#a06d56', '600')" style="cursor: pointer; background-color: #a06d56; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">600</div>
+                    <div style="font-size: 0.75rem; color: white;">#a06d56</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#855849', '700')" style="cursor: pointer; background-color: #855849; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">700</div>
+                    <div style="font-size: 0.75rem; color: white;">#855849</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#6d4a3f', '800')" style="cursor: pointer; background-color: #6d4a3f; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">800</div>
+                    <div style="font-size: 0.75rem; color: white;">#6d4a3f</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#593d35', '900')" style="cursor: pointer; background-color: #593d35; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">900</div>
+                    <div style="font-size: 0.75rem; color: white;">#593d35</div>
+                </div>
+                <div onclick="copyEAAWarmColor('#2f1e1b', '950')" style="cursor: pointer; background-color: #2f1e1b; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">950</div>
+                    <div style="font-size: 0.75rem; color: white;">#2f1e1b</div>
+                </div>
+            </div>
+            <hr style="border: none; height: 1px; background-color: #e0e0e0; margin: 20px 0;">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;">
+                <button onclick="copyAllEAAWarm()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HEX</button>
+                <button onclick="copyEAAWarmRGB()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGB</button>
+                <button onclick="copyEAAWarmRGBA()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGBA</button>
+                <button onclick="copyEAAWarmHSL()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HSL</button>
+                <button onclick="copyEAAWarmCSS()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy CSS Variables</button>
+            </div>
+            <div id="eaaWarmStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <script>
+                function copyEAAWarmColor(hex, variant) {
+                    navigator.clipboard.writeText(hex).then(() => {
+                        const status = document.getElementById('eaaWarmStatus');
+                        status.textContent = `✓ EAA Warm ${variant} (${hex}) copied!`;
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyAllEAAWarm() {
+                    const colors = '#f9f6f3, #f4efe9, #e2d4c6, #cfb8a2, #bb967c, #ad7f62, #a06d56, #855849, #6d4a3f, #593d35, #2f1e1b';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaWarmStatus');
+                        status.textContent = '✓ All EAA Warm colors copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAAWarmCSS() {
+                    const css = `:root {
+  --color-eaa-warm-50: #f9f6f3;
+  --color-eaa-warm-100: #f4efe9;
+  --color-eaa-warm-200: #e2d4c6;
+  --color-eaa-warm-300: #cfb8a2;
+  --color-eaa-warm-400: #bb967c;
+  --color-eaa-warm-500: #ad7f62;
+  --color-eaa-warm-600: #a06d56;
+  --color-eaa-warm-700: #855849;
+  --color-eaa-warm-800: #6d4a3f;
+  --color-eaa-warm-900: #593d35;
+  --color-eaa-warm-950: #2f1e1b;
+}`;
+                    navigator.clipboard.writeText(css).then(() => {
+                        const status = document.getElementById('eaaWarmStatus');
+                        status.textContent = '✓ CSS variables copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAAWarmRGB() {
+                    const colors = 'rgb(249,246,243), rgb(244,239,233), rgb(226,212,198), rgb(207,184,162), rgb(187,150,124), rgb(173,127,98), rgb(160,109,86), rgb(133,88,73), rgb(109,74,63), rgb(89,61,53), rgb(47,30,27)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaWarmStatus');
+                        status.textContent = '✓ RGB values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAAWarmRGBA() {
+                    const colors = 'rgba(249,246,243,1), rgba(244,239,233,1), rgba(226,212,198,1), rgba(207,184,162,1), rgba(187,150,124,1), rgba(173,127,98,1), rgba(160,109,86,1), rgba(133,88,73,1), rgba(109,74,63,1), rgba(89,61,53,1), rgba(47,30,27,1)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaWarmStatus');
+                        status.textContent = '✓ RGBA values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAAWarmHSL() {
+                    const colors = 'hsl(30,33%,96%), hsl(33,31%,94%), hsl(30,23%,83%), hsl(29,22%,72%), hsl(25,23%,61%), hsl(23,28%,53%), hsl(19,30%,48%), hsl(15,29%,40%), hsl(13,27%,34%), hsl(11,25%,28%), hsl(8,27%,14%)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaWarmStatus');
+                        status.textContent = '✓ HSL values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+            </script>
+        </div>
+        <div class="card" style="grid-column: 1 / -1;">
+            <h3>Grey</h3>
+            <div class="color-swatches">
+                <div onclick="copyEAANeutralColor('#f6f6f6', '50')" style="cursor: pointer; background-color: #f6f6f6; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #151515; margin-bottom: 4px;">50</div>
+                    <div style="font-size: 0.75rem; color: #151515;">#f6f6f6</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#e7e7e7', '100')" style="cursor: pointer; background-color: #e7e7e7; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #151515; margin-bottom: 4px;">100</div>
+                    <div style="font-size: 0.75rem; color: #151515;">#e7e7e7</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#d1d1d1', '200')" style="cursor: pointer; background-color: #d1d1d1; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #151515; margin-bottom: 4px;">200</div>
+                    <div style="font-size: 0.75rem; color: #151515;">#d1d1d1</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#b0b0b0', '300')" style="cursor: pointer; background-color: #b0b0b0; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: #151515; margin-bottom: 4px;">300</div>
+                    <div style="font-size: 0.75rem; color: #151515;">#b0b0b0</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#888888', '400')" style="cursor: pointer; background-color: #888888; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">400</div>
+                    <div style="font-size: 0.75rem; color: white;">#888888</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#6d6d6d', '500')" style="cursor: pointer; background-color: #6d6d6d; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">500</div>
+                    <div style="font-size: 0.75rem; color: white;">#6d6d6d</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#5d5d5d', '600')" style="cursor: pointer; background-color: #5d5d5d; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">600</div>
+                    <div style="font-size: 0.75rem; color: white;">#5d5d5d</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#4f4f4f', '700')" style="cursor: pointer; background-color: #4f4f4f; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">700</div>
+                    <div style="font-size: 0.75rem; color: white;">#4f4f4f</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#454545', '800')" style="cursor: pointer; background-color: #454545; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">800</div>
+                    <div style="font-size: 0.75rem; color: white;">#454545</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#3d3d3d', '900')" style="cursor: pointer; background-color: #3d3d3d; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">900</div>
+                    <div style="font-size: 0.75rem; color: white;">#3d3d3d</div>
+                </div>
+                <div onclick="copyEAANeutralColor('#151515', '950')" style="cursor: pointer; background-color: #151515; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">950</div>
+                    <div style="font-size: 0.75rem; color: white;">#151515</div>
+                </div>
+            </div>
+            <hr style="border: none; height: 1px; background-color: #e0e0e0; margin: 20px 0;">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;">
+                <button onclick="copyAllEAANeutral()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HEX</button>
+                <button onclick="copyEAANeutralRGB()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGB</button>
+                <button onclick="copyEAANeutralRGBA()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGBA</button>
+                <button onclick="copyEAANeutralHSL()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HSL</button>
+                <button onclick="copyEAANeutralCSS()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy CSS Variables</button>
+            </div>
+            <div id="eaaNeutralStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <script>
+                function copyEAANeutralColor(hex, variant) {
+                    navigator.clipboard.writeText(hex).then(() => {
+                        const status = document.getElementById('eaaNeutralStatus');
+                        status.textContent = `✓ EAA Neutral ${variant} (${hex}) copied!`;
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyAllEAANeutral() {
+                    const colors = '#f6f6f6, #e7e7e7, #d1d1d1, #b0b0b0, #888888, #6d6d6d, #5d5d5d, #4f4f4f, #454545, #3d3d3d, #151515';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaNeutralStatus');
+                        status.textContent = '✓ All EAA Neutral colors copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAANeutralCSS() {
+                    const css = `:root {
+  --color-eaa-neutral-50: #f6f6f6;
+  --color-eaa-neutral-100: #e7e7e7;
+  --color-eaa-neutral-200: #d1d1d1;
+  --color-eaa-neutral-300: #b0b0b0;
+  --color-eaa-neutral-400: #888888;
+  --color-eaa-neutral-500: #6d6d6d;
+  --color-eaa-neutral-600: #5d5d5d;
+  --color-eaa-neutral-700: #4f4f4f;
+  --color-eaa-neutral-800: #454545;
+  --color-eaa-neutral-900: #3d3d3d;
+  --color-eaa-neutral-950: #151515;
+}`;
+                    navigator.clipboard.writeText(css).then(() => {
+                        const status = document.getElementById('eaaNeutralStatus');
+                        status.textContent = '✓ CSS variables copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAANeutralRGB() {
+                    const colors = 'rgb(246,246,246), rgb(231,231,231), rgb(209,209,209), rgb(176,176,176), rgb(136,136,136), rgb(109,109,109), rgb(93,93,93), rgb(79,79,79), rgb(69,69,69), rgb(61,61,61), rgb(21,21,21)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaNeutralStatus');
+                        status.textContent = '✓ RGB values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAANeutralRGBA() {
+                    const colors = 'rgba(246,246,246,1), rgba(231,231,231,1), rgba(209,209,209,1), rgba(176,176,176,1), rgba(136,136,136,1), rgba(109,109,109,1), rgba(93,93,93,1), rgba(79,79,79,1), rgba(69,69,69,1), rgba(61,61,61,1), rgba(21,21,21,1)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaNeutralStatus');
+                        status.textContent = '✓ RGBA values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+
+                function copyEAANeutralHSL() {
+                    const colors = 'hsl(0,0%,96%), hsl(0,0%,91%), hsl(0,0%,82%), hsl(0,0%,69%), hsl(0,0%,53%), hsl(0,0%,43%), hsl(0,0%,36%), hsl(0,0%,31%), hsl(0,0%,27%), hsl(0,0%,24%), hsl(0,0%,8%)';
+                    navigator.clipboard.writeText(colors).then(() => {
+                        const status = document.getElementById('eaaNeutralStatus');
+                        status.textContent = '✓ HSL values copied!';
+                        setTimeout(() => {
+                            status.textContent = '';
+                        }, 2000);
+                    });
+                }
+            </script>
+        </div>
     </div>
 
-    <h2>Typography</h2>
+    <h2 id="typography">Typography</h2>
     <div class="gallery">
         <div class="card">
             <h3 style="font-family: 'Merriweather', serif; font-size: 1.8rem; margin-bottom: 15px;">Merriweather</h3>
@@ -341,7 +908,7 @@
         </div>
     </div>
 
-    <h2>Logo Variations</h2>
+    <h2 id="logo-variations">Logo Variations</h2>
     <div class="gallery">
         <div class="card">
             <img src="square-logo-full-colour.png" alt="Square logo - Full colour">
@@ -394,7 +961,7 @@
     </div>
 
 
-    <h2>Large Format Logos</h2>
+    <h2 id="large-format-logos">Large Format Logos</h2>
     <div class="gallery">
         <div class="card">
             <img src="large-logo-full-colour.png" alt="Large logo - Full colour">
@@ -428,7 +995,7 @@
 
 
 
-    <h2>Environmental Logo Variations</h2>
+    <h2 id="environmental-logo-variations">Environmental Logo Variations</h2>
     <div class="gallery">
         <div class="card">
             <img src="square-logo-env-full-colour.png" alt="Square logo (env) - Full colour">
@@ -467,7 +1034,7 @@
         </div>
     </div>
 
-    <h2>Environmental Large Format Logos</h2>
+    <h2 id="environmental-large-format-logos">Environmental Large Format Logos</h2>
     <div class="gallery">
         <div class="card">
             <img src="large-logo-env-full-colour.png" alt="Large logo (env) - Full colour">
@@ -499,7 +1066,7 @@
         </div>
     </div>
 
-    <h2>Bad Examples - What NOT to Do</h2>
+    <h2 id="bad-examples">Bad Examples - What NOT to Do</h2>
     <div class="gallery">
         <div class="card bad-example-card">
             <img src="bad-example-stacked-text.png" alt="Bad example - Stacked text">
@@ -532,6 +1099,8 @@
             <p class="good">✓ Use the logos above as a reference</p>
         </div>
     </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
