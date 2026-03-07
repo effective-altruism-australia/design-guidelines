@@ -568,19 +568,10 @@
             background-size: 28px 28px;
         }
 
-        /* Header: animated shifting gradient + clipping context */
+        /* Header: clipping context for orbs */
         .site-header {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(-45deg, var(--dark-deeper) 0%, var(--dark) 30%, var(--primary) 65%, #1299b2 100%);
-            background-size: 280% 280%;
-            animation: headerFlow 20s ease infinite;
-        }
-
-        @keyframes headerFlow {
-            0%   { background-position: 0% 60%; }
-            50%  { background-position: 100% 40%; }
-            100% { background-position: 0% 60%; }
         }
 
         /* Decorative radial-gradient orbs inside header */
@@ -605,81 +596,14 @@
             top: -20px; left: 42%;
         }
 
-        /* Nav sidebar: gradient bar across the top */
-        .quick-nav::before {
-            content: '';
-            display: block;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--dark-deeper));
-            margin: -20px -16px 18px;
-            border-radius: var(--radius) var(--radius) 0 0;
-        }
-
-        /* Active nav link: left-to-right gradient instead of flat bg */
-        .quick-nav a.active {
-            background: linear-gradient(90deg, rgba(12,134,155,0.14), rgba(12,134,155,0.04));
-        }
-
-        /* Card: inset teal top-accent on hover (no overflow:hidden needed) */
-        .card:not(.bad-example-card):hover {
-            box-shadow: var(--shadow-md), inset 0 3px 0 var(--primary);
-        }
-
-        /* Bad-example card: inset red top-accent on hover */
-        .bad-example-card:hover {
-            box-shadow: var(--shadow-md), inset 0 3px 0 var(--bad-banner);
-        }
-
-        /* h2 section accent: fade-out gradient instead of solid line */
-        h2::after {
-            width: 72px;
-            background: linear-gradient(90deg, var(--primary) 0%, rgba(12,134,155,0) 100%);
-        }
-
         /* Palette divider: soft centre-weighted gradient */
         .palette-divider {
             background: linear-gradient(90deg, transparent, #e8e0d8 25%, #e8e0d8 75%, transparent);
         }
 
-        /* Primary button: gradient background */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, #1299b2 100%);
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
-        }
-
-        /* Logo images: subtle transparency checker pattern */
-        .card img:not(.white-logo) {
-            background-image:
-                linear-gradient(45deg, #e8e8e8 25%, transparent 25%),
-                linear-gradient(-45deg, #e8e8e8 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #e8e8e8 75%),
-                linear-gradient(-45deg, transparent 75%, #e8e8e8 75%);
-            background-size: 10px 10px;
-            background-position: 0 0, 0 5px, 5px -5px, -5px 0;
-            background-color: #f6f6f6;
-        }
-
-        /* Bad-examples section: very subtle red wash on the gallery */
-        #bad-examples + .gallery {
-            background: rgba(206,16,16,0.025);
-            border-radius: var(--radius);
-            padding: 16px;
-            margin: 0 -16px 40px;
-        }
-
-        /* Colour palette section: subtle teal wash behind the first gallery */
-        #colour-palette + .gallery {
-            background: linear-gradient(135deg, rgba(12,134,155,0.05) 0%, transparent 55%);
-            border-radius: var(--radius);
-            padding: 12px;
-            margin: 0 -12px 40px;
-        }
-
-        /* ── Print ──────────────────────────────────────── */
+/* ── Print ──────────────────────────────────────── */
         @media print {
-            .site-header { background: none !important; animation: none !important; color: var(--charcoal); padding: 0; }
+            .site-header { background: none !important; color: var(--charcoal); padding: 0; }
             .header-orb { display: none; }
             body { background-image: none; }
             .header-left h1 { color: var(--dark); }
