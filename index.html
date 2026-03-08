@@ -6,205 +6,493 @@
     <title>EAA Design Guidelines</title>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600&family=Mukta:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        /* ── Design tokens ─────────────────────────────── */
+        :root {
+            --primary:        #0C869B;
+            --dark:           #145565;
+            --dark-deeper:    #073845;
+            --warm-white:     #F4EFE9;
+            --charcoal:       #151515;
+            --white:          #FFFFFF;
+            --bg:             #f9f6f3;
+            --good:           #0a5c2b;
+            --bad:            #c53030;
+            --bad-bg:         #fff5f5;
+            --bad-banner:     #ce1010;
+
+            --shadow-sm:  0 1px 3px rgba(20,85,101,0.07), 0 2px 8px rgba(20,85,101,0.06);
+            --shadow-md:  0 4px 16px rgba(20,85,101,0.12), 0 1px 4px rgba(20,85,101,0.07);
+            --shadow-lg:  0 8px 32px rgba(20,85,101,0.16);
+
+            --radius:     16px;
+            --radius-sm:  8px;
+            --radius-xs:  5px;
+            --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ── Reset / base ───────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; }
+
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 20px;
+            scroll-padding-top: 24px;
         }
-        body { 
-            font-family: 'Mukta', Arial, sans-serif; 
+
+        body {
+            font-family: 'Mukta', Arial, sans-serif;
             font-weight: 400;
-            margin: 0; 
-            padding: 0; 
-            background-color: #f9f6f3; 
-            color: #151515; 
-            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--charcoal);
+            line-height: 1.6;
         }
-        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* ── Layout shell ───────────────────────────────── */
+        .site-header {
+            background: linear-gradient(135deg, var(--dark-deeper) 0%, var(--dark) 45%, var(--primary) 100%);
+            color: var(--white);
+            padding: 0;
+            margin-bottom: 0;
+        }
+
+        .site-header .container {
+            padding: 40px 32px 36px;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-left h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--white);
+            margin: 0 0 6px 0;
+            letter-spacing: -0.01em;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+
+        .header-left .subtitle {
+            font-family: 'Mukta', Arial, sans-serif;
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.82);
+            margin: 0;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .last-updated {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.02em;
+        }
+
+        .figma-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+            backdrop-filter: blur(4px);
+        }
+
+        .figma-link:hover {
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.38);
+            color: var(--white);
+        }
+
+        .figma-link img {
+            width: 14px;
+            height: 14px;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .main-layout {
             display: flex;
-            gap: 40px;
+            gap: 32px;
             align-items: flex-start;
+            padding: 32px 24px 60px;
         }
+
+        /* ── Sidebar nav ────────────────────────────────── */
         .quick-nav {
-            padding: 20px;
-            width: 220px;
+            width: 210px;
             flex-shrink: 0;
             position: sticky;
-            top: 10px;
+            top: 24px;
             height: fit-content;
-            box-sizing: border-box;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            padding: 20px 16px;
+            border: 1px solid rgba(20,85,101,0.07);
         }
+
         .quick-nav h3 {
-            margin: 0 0 15px 0;
-            font-size: 1rem;
-            color: #145565;
+            font-family: 'Merriweather', serif;
+            margin: 0 0 14px 0;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
+
         .quick-nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
+
         .quick-nav li {
-            margin-bottom: 8px;
+            margin-bottom: 2px;
         }
+
         .quick-nav a {
-            color: #145565;
+            color: #4a6b74;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: block;
-            padding: 6px 8px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            padding: 7px 10px 7px 12px;
+            border-radius: var(--radius-xs);
+            border-left: 2px solid transparent;
+            transition: background 0.18s var(--ease), color 0.18s var(--ease), border-color 0.18s var(--ease);
+            line-height: 1.35;
         }
+
         .quick-nav a:hover {
-            background-color: #F4EFE9;
+            background: var(--warm-white);
+            color: var(--dark);
         }
+
+        .quick-nav a.active {
+            background: #e8f4f7;
+            color: var(--dark);
+            border-left-color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* ── Main content ───────────────────────────────── */
         .main-content {
-            padding: 20px;
             flex: 1;
             min-width: 0;
         }
-        .header-section {
-            padding: 20px;
-        }
-        @media (max-width: 768px) {
-            .main-layout {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .quick-nav {
-                position: static;
-                width: 100%;
-                order: -1;
-            }
-            .header-section > div:first-child {
-                flex-direction: column;
-                align-items: stretch !important;
-            }
-            .header-section > div:first-child > div:last-child {
-                text-align: left !important;
-                margin-top: 15px;
-                width: 100%;
-            }
-        }
-        h1, h2, h3 { 
+
+        /* ── Headings ───────────────────────────────────── */
+        h1, h2, h3 {
             font-family: 'Merriweather', serif;
         }
-        h1 { 
-            text-align: left; 
-            margin-top: 0px;
-            margin-bottom: 8px; 
-            color: #145565; 
-            font-weight: 600; 
-            font-size: 2.5rem;
+
+        h2 {
+            color: var(--dark);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin: 56px 0 24px 0;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--warm-white);
+            position: relative;
         }
-        .subtitle {
-            font-family: 'Mukta', Arial, sans-serif;
-            font-size: 1.2rem;
-            color: #145565;
-            margin-bottom: 30px;
-            font-weight: 400;
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 48px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
         }
-        h2 { 
-            color: #145565; 
-            border-bottom: 1px solid #145565; 
-            padding-bottom: 12px; 
-            margin: 60px 0 30px 0; 
-            font-weight: 400;
-        }
+
         h2:first-of-type {
             margin-top: 0;
         }
-        .gallery { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 24px; 
+
+        /* ── Cards ──────────────────────────────────────── */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
             margin-bottom: 40px;
         }
-        @media (max-width: 900px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
+
+        .card {
+            background: var(--white);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius);
+            border: 1px solid rgba(20,85,101,0.06);
+
+            /* Scroll animation — starts invisible */
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.45s var(--ease), transform 0.45s var(--ease),
+                        box-shadow 0.25s var(--ease);
         }
-        @media (max-width: 600px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            color: var(--dark);
+            font-weight: 400;
+            font-size: 1rem;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            max-height: 128px;
+            margin-bottom: 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(0,0,0,0.08);
+            display: block;
+        }
+
+        .white-logo {
+            background-color: #000;
+        }
+
+        /* ── Good / bad text ────────────────────────────── */
+        .good { color: var(--good); font-weight: 500; }
+        .bad  { color: var(--bad);  font-weight: 500; }
+
+        /* ── Bad example cards ──────────────────────────── */
+        .bad-example-card {
+            position: relative;
+            padding-top: 42px;
+            border: 1px solid rgba(206,16,16,0.18);
+        }
+
+        .bad-example-card .bad-banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bad-banner);
+            color: var(--white);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .bad-example-card:hover {
+            background: var(--bad-bg);
+            border-color: rgba(206,16,16,0.35);
+        }
+
+        /* ── Colour swatches ────────────────────────────── */
         .color-swatches {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 8px;
             margin: 16px 0;
         }
-        @media (max-width: 900px) {
-            .color-swatches {
-                grid-template-columns: repeat(4, 1fr);
-            }
+
+        .swatch {
+            cursor: pointer;
+            border-radius: 12px;
+            padding: 12px 6px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+            user-select: none;
         }
-        @media (max-width: 600px) {
-            .color-swatches {
-                grid-template-columns: repeat(3, 1fr);
-            }
+
+        .swatch:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
         }
-        .card { 
-            background: #FFFFFF; 
-            padding: 20px; 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 16px;
+
+        .swatch:active {
+            transform: scale(0.97);
         }
-        .bad-example-card {
-            position: relative;
-            transition: all 0.3s ease;
+
+        .swatch-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 3px;
         }
-        .bad-example-card:hover {
-            background: #fff5f5;
+
+        .swatch-hex {
+            font-size: 0.7rem;
         }
-        .bad-example-card::before {
-            content: "BAD EXAMPLE - Please don't do this";
-            position: absolute;
-            top: -1px;
-            right: -1px;
-            background: #ce1010;
-            box-sizing: border-box;
+
+        /* ── Top colour cards ───────────────────────────── */
+        .color-chip {
             width: 100%;
-            color: white;
-            padding: 4px 8px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            border-radius: 8px 8px 0 0 ;
-            opacity: 0;
-            transform: translate(0, -10px);
-            transition: all 0.3s ease;
-        }
-        .bad-example-card:hover::before {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .card img { 
-            max-width: 100%; 
-            height: auto; 
-            max-height: 128px;
-            margin-bottom: 16px; 
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-        }
-        .white-logo { 
-            background-color: #000000; 
-            border-radius: 8px;
-        }
-        .card h3 { 
-            margin: 0 0 12px 0; 
-            color: #145565; 
-            font-weight: 400;
-        }
-        .good { color: #0a5c2b; font-weight: 500; }
-        .bad { color: #c53030; font-weight: 500; }
-        .download-link {
+            height: 112px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
             position: relative;
-            display: inline-block;
+            overflow: hidden;
+            transition: transform 0.2s var(--ease);
+            user-select: none;
         }
+
+        .color-chip::after {
+            content: 'Click to copy';
+            position: absolute;
+            bottom: 0;
+            left: 0; right: 0;
+            background: rgba(0,0,0,0.32);
+            color: rgba(255,255,255,0.92);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 5px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.2s var(--ease);
+        }
+
+        .color-chip:hover::after {
+            opacity: 1;
+        }
+
+        .color-chip:hover {
+            transform: scale(1.02);
+        }
+
+        .copied-flash {
+            animation: copiedPop 0.35s var(--ease);
+        }
+
+        @keyframes copiedPop {
+            0%   { transform: scale(1.02); }
+            40%  { transform: scale(0.96); }
+            100% { transform: scale(1.02); }
+        }
+
+        /* ── Copy status badges ─────────────────────────── */
+        .copy-status {
+            font-size: 0.82rem;
+            color: var(--good);
+            margin-top: 6px;
+            min-height: 20px;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        /* ── Buttons ────────────────────────────────────── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: none;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: 'Mukta', Arial, sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: background 0.18s var(--ease), box-shadow 0.18s var(--ease), transform 0.12s var(--ease);
+        }
+
+        .btn:active { transform: scale(0.97); }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--dark);
+            box-shadow: 0 3px 10px rgba(12,134,155,0.35);
+        }
+
+        .btn-ghost {
+            background: var(--warm-white);
+            color: var(--dark);
+        }
+        .btn-ghost:hover {
+            background: #e8d8c8;
+        }
+
+        .copy-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0 8px;
+        }
+
+        .copy-buttons .btn {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        /* ── Download links ─────────────────────────────── */
+        .download-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .dl-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--primary);
+            text-decoration: none;
+            background: rgba(12,134,155,0.08);
+            border: 1px solid rgba(12,134,155,0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            transition: background 0.18s var(--ease), color 0.18s var(--ease);
+        }
+
+        .dl-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Keep old tooltip for any remaining uses */
+        .download-link { position: relative; display: inline-block; }
         .download-link .tooltip {
             visibility: hidden;
             width: 200px;
@@ -212,136 +500,156 @@
             color: #fff;
             text-align: center;
             border-radius: 24px;
-            padding: 12px 16px;
+            padding: 10px 14px;
             position: absolute;
-            z-index: 1;
-            bottom: 125%;
+            z-index: 10;
+            bottom: 130%;
             left: 50%;
             margin-left: -100px;
             opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.9rem;
-            font-weight: 400;
+            transition: opacity 0.25s;
+            font-size: 0.82rem;
         }
         .download-link .tooltip::after {
             content: "";
             position: absolute;
-            top: 100%;
-            left: 50%;
+            top: 100%; left: 50%;
             margin-left: -5px;
             border-width: 5px;
             border-style: solid;
             border-color: #333 transparent transparent transparent;
         }
-        .download-link:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
+        .download-link:hover .tooltip { visibility: visible; opacity: 1; }
+
+        /* ── HR divider ─────────────────────────────────── */
+        .palette-divider {
+            border: none;
+            height: 1px;
+            background: #e8e0d8;
+            margin: 20px 0;
         }
-        
-        /* Hide print-only elements on screen */
-        .print-only-url {
-            display: none;
+
+        /* ── Print-only ─────────────────────────────────── */
+        .print-only-url { display: none; }
+
+        /* ── Responsive ─────────────────────────────────── */
+        @media (max-width: 900px) {
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+            .color-swatches { grid-template-columns: repeat(4, 1fr); }
         }
-        
-        /* Print styles for clean PDF output */
-        @media print {
-            .quick-nav {
-                display: none;
-            }
+
+        @media (max-width: 768px) {
+            .site-header .container { padding: 28px 20px 24px; }
+            .header-inner { flex-direction: column; align-items: flex-start; }
+            .header-right { align-items: flex-start; }
+            .header-left h1 { font-size: 1.9rem; }
+
             .main-layout {
-                display: block;
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 16px 48px;
             }
-            .main-content {
+            .quick-nav {
+                position: static;
                 width: 100%;
-                max-width: none;
             }
-            .card {
-                page-break-inside: avoid;
-                break-inside: avoid;
-            }
-            .color-swatches {
-                page-break-inside: avoid;
-                break-inside: avoid;
-            }
-            h2 {
-                page-break-before: always;
-                break-before: page;
-                padding-top: 40px;
-            }
-            
-            /* Ensure first section doesn't have a page break */
-            h2:first-of-type {
-                page-break-before: auto;
-                break-before: auto;
-                padding-top: 0;
-            }
-            
-            /* Prevent breaking inside cards */
-            .card {
-                page-break-inside: avoid;
-                break-inside: avoid;
-            }
-            
-            /* Hide tooltips in print */
-            .tooltip {
-                display: none;
-            }
-            
-            /* Hide utilities card with interactive elements */
-            .utilities-card {
-                display: none;
-            }
-            
-            /* Show print-only URL message */
-            .print-only-url {
-                display: block;
-                border-top: 1px solid #ddd;
-                padding: 8px 0;
-                margin: 20px 0;
-                font-size: 0.9rem;
-                color: #666;
-                text-align: left;
-            }
-            
-            /* Better print margins */
-            body {
-                margin: 0.5in;
-            }
-            
-            /* Ensure good contrast for print */
-            .bad-example-card::before {
-                opacity: 1 !important;
-                transform: scale(1) !important;
-            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery { grid-template-columns: 1fr; }
+            .color-swatches { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* ── Visual flourishes ──────────────────────────── */
+
+        /* Subtle dot grid on page background */
+        body {
+            background-image: radial-gradient(rgba(20,85,101,0.065) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        /* Header: clipping context for orbs */
+        .site-header {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative radial-gradient orbs inside header */
+        .header-orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .header-orb-1 {
+            width: 440px; height: 440px;
+            background: radial-gradient(circle at center, rgba(30,229,242,0.2) 0%, transparent 65%);
+            top: -160px; right: -80px;
+        }
+        .header-orb-2 {
+            width: 280px; height: 280px;
+            background: radial-gradient(circle at center, rgba(244,239,233,0.12) 0%, transparent 65%);
+            bottom: -90px; left: 18%;
+        }
+        .header-orb-3 {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle at center, rgba(12,134,155,0.28) 0%, transparent 65%);
+            top: -20px; left: 42%;
+        }
+
+        /* Palette divider: soft centre-weighted gradient */
+        .palette-divider {
+            background: linear-gradient(90deg, transparent, #e8e0d8 25%, #e8e0d8 75%, transparent);
+        }
+
+/* ── Print ──────────────────────────────────────── */
+        @media print {
+            .site-header { background: none !important; color: var(--charcoal); padding: 0; }
+            .header-orb { display: none; }
+            body { background-image: none; }
+            .header-left h1 { color: var(--dark); }
+            .header-left .subtitle { color: var(--dark); }
+            .figma-link { display: none; }
+            .quick-nav { display: none; }
+            .main-layout { display: block; padding: 0; }
+            .main-content { width: 100%; }
+            .card { opacity: 1; transform: none; page-break-inside: avoid; break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+            .color-swatches { page-break-inside: avoid; break-inside: avoid; }
+            h2 { page-break-before: always; break-before: page; padding-top: 32px; }
+            h2:first-of-type { page-break-before: auto; break-before: auto; padding-top: 0; }
+            .tooltip, .utilities-card { display: none; }
+            .print-only-url { display: block; border-top: 1px solid #ddd; padding: 8px 0; margin: 20px 0; font-size: 0.9rem; color: #666; }
+            body { margin: 0.5in; }
+            .bad-example-card .bad-banner { background: var(--bad-banner) !important; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header-section">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap;">
-                <div>
+    <header class="site-header">
+        <div class="header-orb header-orb-1" aria-hidden="true"></div>
+        <div class="header-orb header-orb-2" aria-hidden="true"></div>
+        <div class="header-orb header-orb-3" aria-hidden="true"></div>
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-left">
                     <h1>Design Guidelines</h1>
-                    <div class="subtitle">Effective Altruism Australia</div>
+                    <p class="subtitle">Effective Altruism Australia</p>
                 </div>
-                <div style="text-align: right; padding: 10px; background: #f9f6f3; border-radius: 8px;">
-                    <div style="margin-bottom: 8px; color: #666; font-size: 0.9rem;">
-                        Last updated: 27 July 2025
-                    </div>
-                    <div>
-                        <a href="https://www.figma.com/design/DzCzJ9A9siHWKl7HtVvGKG/EAA-Design-Guidelines" target="_blank" style="color: #666; text-decoration: underline; font-weight: 400; display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem;">
-                            <img src="Figma-logo.svg" alt="Figma" style="width: 14px; height: 14px; opacity: 0.7;">
-                            Edit in Figma
-                        </a>
-                    </div>
+                <div class="header-right">
+                    <span class="last-updated">Last updated: 27 July 2025</span>
+                    <a href="https://www.figma.com/design/DzCzJ9A9siHWKl7HtVvGKG/EAA-Design-Guidelines" target="_blank" class="figma-link">
+                        <img src="Figma-logo.svg" alt="Figma">
+                        Edit in Figma
+                    </a>
                 </div>
-            </div>
-            
-            <div class="print-only-url">
-                To get the latest version visit: https://effective-altruism-australia.github.io/design-guidelines/
             </div>
         </div>
-        
+    </header>
+
+    <div class="container">
+        <div class="print-only-url">
+            To get the latest version visit: https://effective-altruism-australia.github.io/design-guidelines/
+        </div>
+
         <div class="main-layout">
             <nav class="quick-nav">
                 <h3>Navigation</h3>
@@ -361,45 +669,45 @@
     <h2 id="colour-palette">Colour Palette</h2>
     <div class="gallery">
         <div class="card">
-            <div onclick="copyTopCardColor('#0C869B', 'Primary Teal')" style="width: 100%; height: 120px; background-color: #0C869B; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#0C869B</div>
+            <div class="color-chip" style="background:#0C869B;color:#fff;" onclick="copyTopCardColor('#0C869B','Primary Teal')">#0C869B</div>
             <h3>Primary Teal</h3>
-            <p><strong></strong> Accents, buttons, links, highlights</p>
-            <div id="primaryTealStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <p>Accents, buttons, links, highlights</p>
+            <div id="primaryTealStatus" class="copy-status"></div>
         </div>
         <div class="card">
-            <div onclick="copyTopCardColor('#145565', 'Dark Teal')" style="width: 100%; height: 120px; background-color: #145565; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#145565</div>
+            <div class="color-chip" style="background:#145565;color:#fff;" onclick="copyTopCardColor('#145565','Dark Teal')">#145565</div>
             <h3>Dark Teal</h3>
-            <p><strong></strong> Headings, dark text, navigation</p>
-            <div id="darkTealStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <p>Headings, dark text, navigation</p>
+            <div id="darkTealStatus" class="copy-status"></div>
         </div>
         <div class="card">
-            <div onclick="copyTopCardColor('#F4EFE9', 'Warm Off-White')" style="width: 100%; height: 120px; background-color: #F4EFE9; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#F4EFE9</div>
+            <div class="color-chip" style="background:#F4EFE9;color:#151515;border:1px solid #ddd;" onclick="copyTopCardColor('#F4EFE9','Warm Off-White')">#F4EFE9</div>
             <h3>Warm Off-White</h3>
-            <p><strong></strong> Page backgrounds, subtle sections</p>
-            <div id="warmOffWhiteStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <p>Page backgrounds, subtle sections</p>
+            <div id="warmOffWhiteStatus" class="copy-status"></div>
         </div>
         <div class="card">
-            <div onclick="copyTopCardColor('#151515', 'Charcoal Black')" style="width: 100%; height: 120px; background-color: #151515; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#151515</div>
+            <div class="color-chip" style="background:#151515;color:#fff;" onclick="copyTopCardColor('#151515','Charcoal Black')">#151515</div>
             <h3>Charcoal Black</h3>
-            <p><strong></strong> Body text, primary content</p>
-            <div id="charcoalBlackStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <p>Body text, primary content</p>
+            <div id="charcoalBlackStatus" class="copy-status"></div>
         </div>
         <div class="card">
-            <div onclick="copyTopCardColor('#FFFFFF', 'Pure White')" style="width: 100%; height: 120px; background-color: #FFFFFF; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: #151515; font-weight: bold; font-size: 1.2rem; border: 1px solid #ddd; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">#FFFFFF</div>
+            <div class="color-chip" style="background:#FFFFFF;color:#151515;border:1px solid #ddd;" onclick="copyTopCardColor('#FFFFFF','Pure White')">#FFFFFF</div>
             <h3>Pure White</h3>
-            <p><strong></strong> Card backgrounds, content areas</p>
-            <div id="pureWhiteStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <p>Card backgrounds, content areas</p>
+            <div id="pureWhiteStatus" class="copy-status"></div>
         </div>
         <div class="card utilities-card">
-            <h3>Copy 5 Main colours as:</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0;">
-                <button onclick="copyAllColours()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">HEX</button>
-                <button onclick="copyFormat('rgb')" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">RGB</button>
-                <button onclick="copyFormat('rgba')" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">RGBA</button>
-                <button onclick="copyFormat('hsl')" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">HSL</button>
-                <button onclick="copyCSS()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; grid-column: span 2;">CSS Variables</button>
+            <h3>Copy 5 main colours as:</h3>
+            <div class="copy-buttons" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0;">
+                <button onclick="copyAllColours()" class="btn btn-ghost">HEX</button>
+                <button onclick="copyFormat('rgb')" class="btn btn-ghost">RGB</button>
+                <button onclick="copyFormat('rgba')" class="btn btn-ghost">RGBA</button>
+                <button onclick="copyFormat('hsl')" class="btn btn-ghost">HSL</button>
+                <button onclick="copyCSS()" class="btn btn-primary" style="grid-column:span 2">CSS Variables</button>
             </div>
-            <div id="copyStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <div id="copyStatus" class="copy-status"></div>
             <script>
                 function showStatus(message) {
                     const status = document.getElementById('copyStatus');
@@ -476,60 +784,27 @@
         <div class="card" style="grid-column: 1 / -1;">
             <h3>Teal</h3>
             <div class="color-swatches">
-                <div onclick="copyEAATealColor('#ecffff', '50')" style="cursor: pointer; background-color: #ecffff; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">50</div>
-                    <div style="font-size: 0.75rem; color: #145565;">#ecffff</div>
-                </div>
-                <div onclick="copyEAATealColor('#cefeff', '100')" style="cursor: pointer; background-color: #cefeff; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">100</div>
-                    <div style="font-size: 0.75rem; color: #145565;">#cefeff</div>
-                </div>
-                <div onclick="copyEAATealColor('#a3fafe', '200')" style="cursor: pointer; background-color: #a3fafe; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">200</div>
-                    <div style="font-size: 0.75rem; color: #145565;">#a3fafe</div>
-                </div>
-                <div onclick="copyEAATealColor('#64f4fc', '300')" style="cursor: pointer; background-color: #64f4fc; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">300</div>
-                    <div style="font-size: 0.75rem; color: #145565;">#64f4fc</div>
-                </div>
-                <div onclick="copyEAATealColor('#1ee5f2', '400')" style="cursor: pointer; background-color: #1ee5f2; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #145565; margin-bottom: 4px;">400</div>
-                    <div style="font-size: 0.75rem; color: #145565;">#1ee5f2</div>
-                </div>
-                <div onclick="copyEAATealColor('#02c8d8', '500')" style="cursor: pointer; background-color: #02c8d8; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">500</div>
-                    <div style="font-size: 0.75rem; color: white;">#02c8d8</div>
-                </div>
-                <div onclick="copyEAATealColor('#059fb5', '600')" style="cursor: pointer; background-color: #059fb5; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">600</div>
-                    <div style="font-size: 0.75rem; color: white;">#059fb5</div>
-                </div>
-                <div onclick="copyEAATealColor('#0c869b', '700')" style="cursor: pointer; background-color: #0c869b; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">700</div>
-                    <div style="font-size: 0.75rem; color: white;">#0c869b</div>
-                </div>
-                <div onclick="copyEAATealColor('#136677', '800')" style="cursor: pointer; background-color: #136677; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">800</div>
-                    <div style="font-size: 0.75rem; color: white;">#136677</div>
-                </div>
-                <div onclick="copyEAATealColor('#145565', '900')" style="cursor: pointer; background-color: #145565; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">900</div>
-                    <div style="font-size: 0.75rem; color: white;">#145565</div>
-                </div>
-                <div onclick="copyEAATealColor('#073845', '950')" style="cursor: pointer; background-color: #073845; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">950</div>
-                    <div style="font-size: 0.75rem; color: white;">#073845</div>
-                </div>
+                <div class="swatch" onclick="copyEAATealColor('#ecffff','50')" style="background:#ecffff;border-color:#ddd"><div class="swatch-label" style="color:#145565">50</div><div class="swatch-hex" style="color:#145565">#ecffff</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#cefeff','100')" style="background:#cefeff;border-color:#ddd"><div class="swatch-label" style="color:#145565">100</div><div class="swatch-hex" style="color:#145565">#cefeff</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#a3fafe','200')" style="background:#a3fafe;border-color:#ddd"><div class="swatch-label" style="color:#145565">200</div><div class="swatch-hex" style="color:#145565">#a3fabe</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#64f4fc','300')" style="background:#64f4fc;border-color:#ddd"><div class="swatch-label" style="color:#145565">300</div><div class="swatch-hex" style="color:#145565">#64f4fc</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#1ee5f2','400')" style="background:#1ee5f2;border-color:#ddd"><div class="swatch-label" style="color:#145565">400</div><div class="swatch-hex" style="color:#145565">#1ee5f2</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#02c8d8','500')" style="background:#02c8d8"><div class="swatch-label" style="color:#fff">500</div><div class="swatch-hex" style="color:#fff">#02c8d8</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#059fb5','600')" style="background:#059fb5"><div class="swatch-label" style="color:#fff">600</div><div class="swatch-hex" style="color:#fff">#059fb5</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#0c869b','700')" style="background:#0c869b"><div class="swatch-label" style="color:#fff">700</div><div class="swatch-hex" style="color:#fff">#0c869b</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#136677','800')" style="background:#136677"><div class="swatch-label" style="color:#fff">800</div><div class="swatch-hex" style="color:#fff">#136677</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#145565','900')" style="background:#145565"><div class="swatch-label" style="color:#fff">900</div><div class="swatch-hex" style="color:#fff">#145565</div></div>
+                <div class="swatch" onclick="copyEAATealColor('#073845','950')" style="background:#073845"><div class="swatch-label" style="color:#fff">950</div><div class="swatch-hex" style="color:#fff">#073845</div></div>
             </div>
-            <hr style="border: none; height: 1px; background-color: #e0e0e0; margin: 20px 0;">
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;">
-                <button onclick="copyAllEAATeal()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HEX</button>
-                <button onclick="copyEAATealRGB()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGB</button>
-                <button onclick="copyEAATealRGBA()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGBA</button>
-                <button onclick="copyEAATealHSL()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HSL</button>
-                <button onclick="copyEAATealCSS()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy CSS Variables</button>
+            <hr class="palette-divider">
+            <div class="copy-buttons">
+                <button onclick="copyAllEAATeal()" class="btn btn-ghost">Copy HEX</button>
+                <button onclick="copyEAATealRGB()" class="btn btn-ghost">Copy RGB</button>
+                <button onclick="copyEAATealRGBA()" class="btn btn-ghost">Copy RGBA</button>
+                <button onclick="copyEAATealHSL()" class="btn btn-ghost">Copy HSL</button>
+                <button onclick="copyEAATealCSS()" class="btn btn-primary">Copy CSS Variables</button>
             </div>
-            <div id="eaaTealStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <div id="eaaTealStatus" class="copy-status"></div>
             <script>
                 function copyEAATealColor(hex, variant) {
                     navigator.clipboard.writeText(hex).then(() => {
@@ -612,60 +887,27 @@
         <div class="card" style="grid-column: 1 / -1;">
             <h3>Bronze</h3>
             <div class="color-swatches">
-                <div onclick="copyEAAWarmColor('#f9f6f3', '50')" style="cursor: pointer; background-color: #f9f6f3; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">50</div>
-                    <div style="font-size: 0.75rem; color: #2f1e1b;">#f9f6f3</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#f4efe9', '100')" style="cursor: pointer; background-color: #f4efe9; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">100</div>
-                    <div style="font-size: 0.75rem; color: #2f1e1b;">#f4efe9</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#e2d4c6', '200')" style="cursor: pointer; background-color: #e2d4c6; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">200</div>
-                    <div style="font-size: 0.75rem; color: #2f1e1b;">#e2d4c6</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#cfb8a2', '300')" style="cursor: pointer; background-color: #cfb8a2; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">300</div>
-                    <div style="font-size: 0.75rem; color: #2f1e1b;">#cfb8a2</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#bb967c', '400')" style="cursor: pointer; background-color: #bb967c; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #2f1e1b; margin-bottom: 4px;">400</div>
-                    <div style="font-size: 0.75rem; color: #2f1e1b;">#bb967c</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#ad7f62', '500')" style="cursor: pointer; background-color: #ad7f62; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">500</div>
-                    <div style="font-size: 0.75rem; color: white;">#ad7f62</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#a06d56', '600')" style="cursor: pointer; background-color: #a06d56; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">600</div>
-                    <div style="font-size: 0.75rem; color: white;">#a06d56</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#855849', '700')" style="cursor: pointer; background-color: #855849; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">700</div>
-                    <div style="font-size: 0.75rem; color: white;">#855849</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#6d4a3f', '800')" style="cursor: pointer; background-color: #6d4a3f; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">800</div>
-                    <div style="font-size: 0.75rem; color: white;">#6d4a3f</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#593d35', '900')" style="cursor: pointer; background-color: #593d35; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">900</div>
-                    <div style="font-size: 0.75rem; color: white;">#593d35</div>
-                </div>
-                <div onclick="copyEAAWarmColor('#2f1e1b', '950')" style="cursor: pointer; background-color: #2f1e1b; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">950</div>
-                    <div style="font-size: 0.75rem; color: white;">#2f1e1b</div>
-                </div>
+                <div class="swatch" onclick="copyEAAWarmColor('#f9f6f3','50')" style="background:#f9f6f3;border-color:#ddd"><div class="swatch-label" style="color:#2f1e1b">50</div><div class="swatch-hex" style="color:#2f1e1b">#f9f6f3</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#f4efe9','100')" style="background:#f4efe9;border-color:#ddd"><div class="swatch-label" style="color:#2f1e1b">100</div><div class="swatch-hex" style="color:#2f1e1b">#f4efe9</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#e2d4c6','200')" style="background:#e2d4c6;border-color:#ddd"><div class="swatch-label" style="color:#2f1e1b">200</div><div class="swatch-hex" style="color:#2f1e1b">#e2d4c6</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#cfb8a2','300')" style="background:#cfb8a2;border-color:#ddd"><div class="swatch-label" style="color:#2f1e1b">300</div><div class="swatch-hex" style="color:#2f1e1b">#cfb8a2</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#bb967c','400')" style="background:#bb967c;border-color:#ddd"><div class="swatch-label" style="color:#2f1e1b">400</div><div class="swatch-hex" style="color:#2f1e1b">#bb967c</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#ad7f62','500')" style="background:#ad7f62"><div class="swatch-label" style="color:#fff">500</div><div class="swatch-hex" style="color:#fff">#ad7f62</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#a06d56','600')" style="background:#a06d56"><div class="swatch-label" style="color:#fff">600</div><div class="swatch-hex" style="color:#fff">#a06d56</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#855849','700')" style="background:#855849"><div class="swatch-label" style="color:#fff">700</div><div class="swatch-hex" style="color:#fff">#855849</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#6d4a3f','800')" style="background:#6d4a3f"><div class="swatch-label" style="color:#fff">800</div><div class="swatch-hex" style="color:#fff">#6d4a3f</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#593d35','900')" style="background:#593d35"><div class="swatch-label" style="color:#fff">900</div><div class="swatch-hex" style="color:#fff">#593d35</div></div>
+                <div class="swatch" onclick="copyEAAWarmColor('#2f1e1b','950')" style="background:#2f1e1b"><div class="swatch-label" style="color:#fff">950</div><div class="swatch-hex" style="color:#fff">#2f1e1b</div></div>
             </div>
-            <hr style="border: none; height: 1px; background-color: #e0e0e0; margin: 20px 0;">
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;">
-                <button onclick="copyAllEAAWarm()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HEX</button>
-                <button onclick="copyEAAWarmRGB()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGB</button>
-                <button onclick="copyEAAWarmRGBA()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGBA</button>
-                <button onclick="copyEAAWarmHSL()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HSL</button>
-                <button onclick="copyEAAWarmCSS()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy CSS Variables</button>
+            <hr class="palette-divider">
+            <div class="copy-buttons">
+                <button onclick="copyAllEAAWarm()" class="btn btn-ghost">Copy HEX</button>
+                <button onclick="copyEAAWarmRGB()" class="btn btn-ghost">Copy RGB</button>
+                <button onclick="copyEAAWarmRGBA()" class="btn btn-ghost">Copy RGBA</button>
+                <button onclick="copyEAAWarmHSL()" class="btn btn-ghost">Copy HSL</button>
+                <button onclick="copyEAAWarmCSS()" class="btn btn-primary">Copy CSS Variables</button>
             </div>
-            <div id="eaaWarmStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <div id="eaaWarmStatus" class="copy-status"></div>
             <script>
                 function copyEAAWarmColor(hex, variant) {
                     navigator.clipboard.writeText(hex).then(() => {
@@ -748,60 +990,27 @@
         <div class="card" style="grid-column: 1 / -1;">
             <h3>Grey</h3>
             <div class="color-swatches">
-                <div onclick="copyEAANeutralColor('#f6f6f6', '50')" style="cursor: pointer; background-color: #f6f6f6; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #151515; margin-bottom: 4px;">50</div>
-                    <div style="font-size: 0.75rem; color: #151515;">#f6f6f6</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#e7e7e7', '100')" style="cursor: pointer; background-color: #e7e7e7; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #151515; margin-bottom: 4px;">100</div>
-                    <div style="font-size: 0.75rem; color: #151515;">#e7e7e7</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#d1d1d1', '200')" style="cursor: pointer; background-color: #d1d1d1; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #151515; margin-bottom: 4px;">200</div>
-                    <div style="font-size: 0.75rem; color: #151515;">#d1d1d1</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#b0b0b0', '300')" style="cursor: pointer; background-color: #b0b0b0; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: #151515; margin-bottom: 4px;">300</div>
-                    <div style="font-size: 0.75rem; color: #151515;">#b0b0b0</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#888888', '400')" style="cursor: pointer; background-color: #888888; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #ddd; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">400</div>
-                    <div style="font-size: 0.75rem; color: white;">#888888</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#6d6d6d', '500')" style="cursor: pointer; background-color: #6d6d6d; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">500</div>
-                    <div style="font-size: 0.75rem; color: white;">#6d6d6d</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#5d5d5d', '600')" style="cursor: pointer; background-color: #5d5d5d; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">600</div>
-                    <div style="font-size: 0.75rem; color: white;">#5d5d5d</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#4f4f4f', '700')" style="cursor: pointer; background-color: #4f4f4f; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">700</div>
-                    <div style="font-size: 0.75rem; color: white;">#4f4f4f</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#454545', '800')" style="cursor: pointer; background-color: #454545; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">800</div>
-                    <div style="font-size: 0.75rem; color: white;">#454545</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#3d3d3d', '900')" style="cursor: pointer; background-color: #3d3d3d; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">900</div>
-                    <div style="font-size: 0.75rem; color: white;">#3d3d3d</div>
-                </div>
-                <div onclick="copyEAANeutralColor('#151515', '950')" style="cursor: pointer; background-color: #151515; border-radius: 24px; padding: 12px 8px; text-align: center; border: 1px solid #fff; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="font-size: 0.85rem; font-weight: bold; color: white; margin-bottom: 4px;">950</div>
-                    <div style="font-size: 0.75rem; color: white;">#151515</div>
-                </div>
+                <div class="swatch" onclick="copyEAANeutralColor('#f6f6f6','50')" style="background:#f6f6f6;border-color:#ddd"><div class="swatch-label" style="color:#151515">50</div><div class="swatch-hex" style="color:#151515">#f6f6f6</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#e7e7e7','100')" style="background:#e7e7e7;border-color:#ddd"><div class="swatch-label" style="color:#151515">100</div><div class="swatch-hex" style="color:#151515">#e7e7e7</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#d1d1d1','200')" style="background:#d1d1d1;border-color:#ddd"><div class="swatch-label" style="color:#151515">200</div><div class="swatch-hex" style="color:#151515">#d1d1d1</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#b0b0b0','300')" style="background:#b0b0b0;border-color:#ddd"><div class="swatch-label" style="color:#151515">300</div><div class="swatch-hex" style="color:#151515">#b0b0b0</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#888888','400')" style="background:#888888;border-color:#ddd"><div class="swatch-label" style="color:#fff">400</div><div class="swatch-hex" style="color:#fff">#888888</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#6d6d6d','500')" style="background:#6d6d6d"><div class="swatch-label" style="color:#fff">500</div><div class="swatch-hex" style="color:#fff">#6d6d6d</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#5d5d5d','600')" style="background:#5d5d5d"><div class="swatch-label" style="color:#fff">600</div><div class="swatch-hex" style="color:#fff">#5d5d5d</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#4f4f4f','700')" style="background:#4f4f4f"><div class="swatch-label" style="color:#fff">700</div><div class="swatch-hex" style="color:#fff">#4f4f4f</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#454545','800')" style="background:#454545"><div class="swatch-label" style="color:#fff">800</div><div class="swatch-hex" style="color:#fff">#454545</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#3d3d3d','900')" style="background:#3d3d3d"><div class="swatch-label" style="color:#fff">900</div><div class="swatch-hex" style="color:#fff">#3d3d3d</div></div>
+                <div class="swatch" onclick="copyEAANeutralColor('#151515','950')" style="background:#151515"><div class="swatch-label" style="color:#fff">950</div><div class="swatch-hex" style="color:#fff">#151515</div></div>
             </div>
-            <hr style="border: none; height: 1px; background-color: #e0e0e0; margin: 20px 0;">
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;">
-                <button onclick="copyAllEAANeutral()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HEX</button>
-                <button onclick="copyEAANeutralRGB()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGB</button>
-                <button onclick="copyEAANeutralRGBA()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy RGBA</button>
-                <button onclick="copyEAANeutralHSL()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy HSL</button>
-                <button onclick="copyEAANeutralCSS()" style="background: #f6f6f6; color: #151515; border: none; padding: 24px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; flex: 1; min-width: 120px;">Copy CSS Variables</button>
+            <hr class="palette-divider">
+            <div class="copy-buttons">
+                <button onclick="copyAllEAANeutral()" class="btn btn-ghost">Copy HEX</button>
+                <button onclick="copyEAANeutralRGB()" class="btn btn-ghost">Copy RGB</button>
+                <button onclick="copyEAANeutralRGBA()" class="btn btn-ghost">Copy RGBA</button>
+                <button onclick="copyEAANeutralHSL()" class="btn btn-ghost">Copy HSL</button>
+                <button onclick="copyEAANeutralCSS()" class="btn btn-primary">Copy CSS Variables</button>
             </div>
-            <div id="eaaNeutralStatus" style="font-size: 0.9rem; color: #145565; margin-top: 5px; min-height: 20px; font-weight: 500;"></div>
+            <div id="eaaNeutralStatus" class="copy-status"></div>
             <script>
                 function copyEAANeutralColor(hex, variant) {
                     navigator.clipboard.writeText(hex).then(() => {
@@ -917,15 +1126,15 @@
             <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
             <p>
                 <span class="download-link">
-                    <a href="square-logo-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a>
+                    <a href="square-logo-full-colour.svg" download class="dl-btn">SVG</a>
                     <span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span>
                 </span> | 
                 <span class="download-link">
-                    <a href="square-logo-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a>
+                    <a href="square-logo-full-colour.png" download class="dl-btn">PNG</a>
                     <span class="tooltip">Best for presentations, documents, and email where compatibility is key</span>
                 </span> | 
                 <span class="download-link">
-                    <a href="square-logo-full-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a>
+                    <a href="square-logo-full-colour-no-padding.png" download class="dl-btn">PNG (no padding)</a>
                     <span class="tooltip">Best for tight layouts where you need precise control over spacing</span>
                 </span>
             </p>
@@ -935,28 +1144,28 @@
             <h3>Square logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
-            <p><span class="download-link"><a href="square-logo-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-mono-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="square-logo-mono-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-mono-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="square-logo-mono-colour-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-black.png" alt="Square logo - Black">
             <h3>Square logo - Black</h3>
             <p class="good">✓ Use on light backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on dark backgrounds</p>
-            <p><span class="download-link"><a href="square-logo-black.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-black.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-black-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="square-logo-black.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-black.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="square-logo-black-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-white.png" alt="Square logo - White" class="white-logo">
             <h3>Square logo - White</h3>
             <p class="good">✓ Use on dark backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on light backgrounds</p>
-            <p><span class="download-link"><a href="square-logo-white.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-white.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-white-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="square-logo-white.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-white.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="square-logo-white-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-inverted-mono-colour.png" alt="Square logo - Inverted mono colour">
             <h3>Square logo - Inverted mono colour</h3>
             <p class="good">✓ Use for social media avatars etc.</p>
             <p class="bad">✗ Don't use in other cases where full colour logo is an option</p>
-            <p><span class="download-link"><a href="square-logo-inverted-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-inverted-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span></p>
+            <p><span class="download-link"><a href="square-logo-inverted-mono-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-inverted-mono-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span></p>
         </div>
     </div>
 
@@ -968,28 +1177,28 @@
             <h3>Large logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
             <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
-            <p><span class="download-link"><a href="large-logo-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-full-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="large-logo-full-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-full-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-full-colour-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-mono-colour.png" alt="Large logo - Mono colour">
             <h3>Large logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Try to use the full colour version if you can</p>
-            <p><span class="download-link"><a href="large-logo-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-mono-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="large-logo-mono-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-mono-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-mono-colour-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-full-colour-dark.png" alt="Large logo - Full colour dark" class="white-logo">
             <h3>Large logo - Full colour dark</h3>
             <p class="good">✓ Use for large displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on on light backgrounds or in small sizes - the gradient on the bulb will get lost in the background</p>
-            <p><span class="download-link"><a href="large-logo-full-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-full-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-full-colour-dark-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="large-logo-full-colour-dark.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-full-colour-dark.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-full-colour-dark-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-mono-colour-dark.png" alt="Large logo - Mono colour dark" class="white-logo">
             <h3>Large logo - Mono colour dark</h3>
             <p class="good">✓ Use for smaller displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on light backgrounds</p>
-            <p><span class="download-link"><a href="large-logo-mono-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-mono-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-mono-colour-dark-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="large-logo-mono-colour-dark.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-mono-colour-dark.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-mono-colour-dark-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
     </div>
 
@@ -1002,35 +1211,35 @@
             <h3>Square logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
             <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
-            <p><span class="download-link"><a href="square-logo-env-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-env-full-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="square-logo-env-full-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-env-full-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="square-logo-env-full-colour-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-env-mono-colour.png" alt="Square logo (env) - Mono colour">
             <h3>Square logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
-            <p><span class="download-link"><a href="square-logo-env-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-env-mono-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="square-logo-env-mono-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-env-mono-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="square-logo-env-mono-colour-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-env-black.png" alt="Square logo (env) - Black">
             <h3>Square logo - Black</h3>
             <p class="good">✓ Use on light backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on dark backgrounds</p>
-            <p><span class="download-link"><a href="square-logo-env-black.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-black.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-env-black-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="square-logo-env-black.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-env-black.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="square-logo-env-black-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-env-white.png" alt="Square logo (env) - White" class="white-logo">
             <h3>Square logo - White</h3>
             <p class="good">✓ Use on dark backgrounds where full colour won't work</p>
             <p class="bad">✗ Never use on light backgrounds</p>
-            <p><span class="download-link"><a href="square-logo-env-white.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-white.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="square-logo-env-white-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="square-logo-env-white.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-env-white.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="square-logo-env-white-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="square-logo-env-inverted-mono-colour.png" alt="Square logo (env) - Inverted mono colour">
             <h3>Square logo - Inverted mono colour</h3>
             <p class="good">✓ Use for social media avatars etc.</p>
             <p class="bad">✗ Don't use in other cases where full colour logo is an option</p>
-            <p><span class="download-link"><a href="square-logo-env-inverted-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="square-logo-env-inverted-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span></p>
+            <p><span class="download-link"><a href="square-logo-env-inverted-mono-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="square-logo-env-inverted-mono-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span></p>
         </div>
     </div>
 
@@ -1041,58 +1250,63 @@
             <h3>Large logo - Full colour</h3>
             <p class="good">✓ Primary brand representation</p>
             <p class="bad">✗ Avoid on coloured backgrounds that conflict</p>
-            <p><span class="download-link"><a href="large-logo-env-full-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-env-full-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-env-full-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="large-logo-env-full-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-env-full-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-env-full-colour-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-env-mono-colour.png" alt="Large logo (env) - Mono colour">
             <h3>Large logo - Mono colour</h3>
             <p class="good">✓ Use when displayed in small sizes or when full colour isn't an option</p>
             <p class="bad">✗ Don't use where full colour is an option</p>
-            <p><span class="download-link"><a href="large-logo-env-mono-colour.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-env-mono-colour.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-env-mono-colour-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="large-logo-env-mono-colour.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-env-mono-colour.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-env-mono-colour-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-env-full-colour-dark.png" alt="Large logo (env) - Full colour dark" class="white-logo">
             <h3>Large logo - Full colour dark</h3>
             <p class="good">✓ Use for large displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on on light backgrounds or in small sizes - the gradient on the bulb will get lost in the background</p>
-            <p><span class="download-link"><a href="large-logo-env-full-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-env-full-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-env-full-colour-dark-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="large-logo-env-full-colour-dark.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-env-full-colour-dark.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-env-full-colour-dark-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
         <div class="card">
             <img src="large-logo-env-mono-colour-dark.png" alt="Large logo (env) - Mono colour dark" class="white-logo">
             <h3>Large logo - Mono colour dark</h3>
             <p class="good">✓ Use for smaller displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on light backgrounds</p>
-            <p><span class="download-link"><a href="large-logo-env-mono-colour-dark.svg" download style="color: #0C869B; text-decoration: none; font-weight: 500;">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> | <span class="download-link"><a href="large-logo-env-mono-colour-dark.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> | <span class="download-link"><a href="large-logo-env-mono-colour-dark-no-padding.png" download style="color: #0C869B; text-decoration: none; font-weight: 500;">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+            <p><span class="download-link"><a href="large-logo-env-mono-colour-dark.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-env-mono-colour-dark.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-env-mono-colour-dark-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
         </div>
     </div>
 
-    <h2 id="bad-examples">Bad Examples - What NOT to Do</h2>
+    <h2 id="bad-examples">Bad Examples — What NOT to Do</h2>
     <div class="gallery">
         <div class="card bad-example-card">
+            <div class="bad-banner">Do not do this</div>
             <img src="bad-example-stacked-text.png" alt="Bad example - Stacked text">
             <h3>Mistake #1</h3>
             <p class="bad">✗ Stack the text next to the logo</p>
             <p class="good">✓ Use standard logo with two lines of text</p>
         </div>
         <div class="card bad-example-card">
+            <div class="bad-banner">Do not do this</div>
             <img src="bad-example-center-justified-text.png" alt="Bad example - Center justified text">
             <h3>Mistake #2</h3>
             <p class="bad">✗ Centre-justify the text next to the logo</p>
             <p class="good">✓ Use standard logo with right-aligned text</p>
         </div>
         <div class="card bad-example-card">
+            <div class="bad-banner">Do not do this</div>
             <img src="bad-example-wrong-font.png" alt="Bad example - Wrong font">
             <h3>Mistake #3</h3>
             <p class="bad">✗ Use other fonts with the logo</p>
             <p class="good">✓ Use Merriweather font</p>
         </div>
         <div class="card bad-example-card">
+            <div class="bad-banner">Do not do this</div>
             <img src="bad-example-awkward-spacing.png" alt="Bad example - Awkward spacing">
             <h3>Mistake #4</h3>
             <p class="bad">✗ Awkwardly space the icon and text</p>
             <p class="good">✓ Use the logos above as a reference</p>
         </div>
         <div class="card bad-example-card">
+            <div class="bad-banner">Do not do this</div>
             <img src="bad-example-squeezed-text.png" alt="Bad example - Squeezed text">
             <h3>Mistake #5</h3>
             <p class="bad">✗ Squeeze the text in too close to the logo</p>
@@ -1102,5 +1316,41 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // ── Scroll-triggered card animations ────────────────────────────
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    // Stagger within a batch by reading the card's position in its gallery
+                    const siblings = Array.from(entry.target.parentElement.children);
+                    const idx = siblings.indexOf(entry.target);
+                    const delay = (idx % 6) * 60; // max ~360ms stagger
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.card').forEach(card => cardObserver.observe(card));
+
+        // ── Active nav link tracking ─────────────────────────────────────
+        const sections = document.querySelectorAll('h2[id]');
+        const navLinks = document.querySelectorAll('.quick-nav a');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    const active = document.querySelector(`.quick-nav a[href="#${entry.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-15% 0px -72% 0px', threshold: 0 });
+
+        sections.forEach(s => sectionObserver.observe(s));
+    </script>
 </body>
 </html>
