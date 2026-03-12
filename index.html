@@ -127,6 +127,41 @@
             opacity: 0.85;
         }
 
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .md-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-family: 'Mukta', Arial, sans-serif;
+            color: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+        }
+
+        .md-btn:hover {
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.38);
+            color: var(--white);
+        }
+
+        .md-btn svg {
+            width: 14px;
+            height: 14px;
+            opacity: 0.85;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -608,7 +643,7 @@
             body { background-image: none; }
             .header-left h1 { color: var(--dark); }
             .header-left .subtitle { color: var(--dark); }
-            .figma-link { display: none; }
+            .figma-link, .md-btn { display: none; }
             .quick-nav { display: none; }
             .main-layout { display: block; padding: 0; }
             .main-content { width: 100%; }
@@ -636,10 +671,20 @@
                 </div>
                 <div class="header-right">
                     <span class="last-updated">Last updated: 27 July 2025</span>
-                    <a href="https://www.figma.com/design/DzCzJ9A9siHWKl7HtVvGKG/EAA-Design-Guidelines" target="_blank" class="figma-link">
-                        <img src="Figma-logo.svg" alt="Figma">
-                        Edit in Figma
-                    </a>
+                    <div class="header-actions">
+                        <a href="https://www.figma.com/design/DzCzJ9A9siHWKl7HtVvGKG/EAA-Design-Guidelines" target="_blank" class="figma-link">
+                            <img src="Figma-logo.svg" alt="Figma">
+                            Edit in Figma
+                        </a>
+                        <button id="copy-md-btn" class="md-btn" onclick="copyMarkdown()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            Copy as Markdown
+                        </button>
+                        <a href="design-guidelines.md" download class="md-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download .md
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1351,6 +1396,24 @@
         }, { rootMargin: '-15% 0px -72% 0px', threshold: 0 });
 
         sections.forEach(s => sectionObserver.observe(s));
+    </script>
+
+    <script>
+        async function copyMarkdown() {
+            const btn = document.getElementById('copy-md-btn');
+            try {
+                const resp = await fetch('design-guidelines.md');
+                const text = await resp.text();
+                await navigator.clipboard.writeText(text);
+                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;opacity:0.85"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;opacity:0.85"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy as Markdown';
+                }, 2000);
+            } catch (e) {
+                btn.textContent = 'Copy failed';
+                setTimeout(() => { btn.textContent = 'Copy as Markdown'; }, 2000);
+            }
+        }
     </script>
 </body>
 </html>
