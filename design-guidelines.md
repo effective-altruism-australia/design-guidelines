@@ -2,6 +2,8 @@
 
 *Last updated: 27 July 2025*
 
+Base URL for all assets: `https://effective-altruism-australia.github.io/design-guidelines/`
+
 ---
 
 ## Colour Palette
@@ -16,7 +18,23 @@
 | Charcoal Black | `#151515` | Body text, primary content |
 | Pure White | `#FFFFFF` | Card backgrounds, content areas |
 
-### EAA Warm Colour Palette
+### EAA Teal Palette
+
+| Step | Hex |
+|------|-----|
+| 50 | `#ecffff` |
+| 100 | `#cefeff` |
+| 200 | `#a3fafe` |
+| 300 | `#64f4fc` |
+| 400 | `#1ee5f2` |
+| 500 | `#02c8d8` |
+| 600 | `#059fb5` |
+| 700 | `#0c869b` |
+| 800 | `#136677` |
+| 900 | `#145565` |
+| 950 | `#073845` |
+
+### EAA Warm (Bronze) Palette
 
 | Step | Hex |
 |------|-----|
@@ -82,62 +100,103 @@
 
 #### Full Colour
 
+![Square logo - Full colour](https://effective-altruism-australia.github.io/design-guidelines/square-logo-full-colour.png)
+
 - **Do:** Primary brand representation
 - **Don't:** Avoid on coloured backgrounds that conflict
-- **Formats:** SVG, PNG, PNG (no padding)
-- SVG is best for web use, large displays, and crisp scalable graphics
-- PNG is best for presentations, documents, and email
-- PNG (no padding) is best for tight layouts with precise spacing control
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-full-colour.svg) - Best for web use, large displays, and crisp scalable graphics
+  - [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-full-colour.png) - Best for presentations, documents, and email
+  - [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/square-logo-full-colour-no-padding.png) - Best for tight layouts with precise spacing control
 
 #### Mono Colour
 
+![Square logo - Mono colour](https://effective-altruism-australia.github.io/design-guidelines/square-logo-mono-colour.png)
+
 - **Do:** Use when displayed in small sizes or when full colour isn't an option
 - **Don't:** Don't use where full colour is an option
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-mono-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-mono-colour.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/square-logo-mono-colour-no-padding.png)
 
 #### Black
 
+![Square logo - Black](https://effective-altruism-australia.github.io/design-guidelines/square-logo-black.png)
+
 - **Do:** Use on light backgrounds where full colour won't work
 - **Don't:** Never use on dark backgrounds
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-black.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-black.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/square-logo-black-no-padding.png)
 
 #### White
 
+![Square logo - White](https://effective-altruism-australia.github.io/design-guidelines/square-logo-white.png)
+
 - **Do:** Use on dark backgrounds where full colour won't work
 - **Don't:** Never use on light backgrounds
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-white.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-white.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/square-logo-white-no-padding.png)
 
 #### Inverted Mono Colour
 
+![Square logo - Inverted mono colour](https://effective-altruism-australia.github.io/design-guidelines/square-logo-inverted-mono-colour.png)
+
 - **Do:** Use for social media avatars etc.
 - **Don't:** Don't use in other cases where full colour logo is an option
-- **Formats:** SVG, PNG
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-inverted-mono-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-inverted-mono-colour.png)
 
 ### Large Format Logos
 
 #### Full Colour
 
+![Large logo - Full colour](https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour.png)
+
 - **Do:** Primary brand representation
 - **Don't:** Avoid on coloured backgrounds that conflict
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour-no-padding.png)
 
 #### Mono Colour
 
+![Large logo - Mono colour](https://effective-altruism-australia.github.io/design-guidelines/large-logo-mono-colour.png)
+
 - **Do:** Use when displayed in small sizes or when full colour isn't an option
 - **Don't:** Try to use the full colour version if you can
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-mono-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-mono-colour.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/large-logo-mono-colour-no-padding.png)
 
 #### Full Colour Dark
 
+![Large logo - Full colour dark](https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour-dark.png)
+
 - **Do:** Use for large displays on dark backgrounds
 - **Don't:** Don't use on light backgrounds or in small sizes - the gradient on the bulb will get lost in the background
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour-dark.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour-dark.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour-dark-no-padding.png)
 
 #### Mono Colour Dark
 
+![Large logo - Mono colour dark](https://effective-altruism-australia.github.io/design-guidelines/large-logo-mono-colour-dark.png)
+
 - **Do:** Use for smaller displays on dark backgrounds
 - **Don't:** Don't use on light backgrounds
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-mono-colour-dark.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-mono-colour-dark.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/large-logo-mono-colour-dark-no-padding.png)
 
 ---
 
@@ -147,59 +206,103 @@
 
 #### Full Colour
 
+![Square logo ENV - Full colour](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-full-colour.png)
+
 - **Do:** Primary brand representation
 - **Don't:** Avoid on coloured backgrounds that conflict
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-full-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-full-colour.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-full-colour-no-padding.png)
 
 #### Mono Colour
 
+![Square logo ENV - Mono colour](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-mono-colour.png)
+
 - **Do:** Use when displayed in small sizes or when full colour isn't an option
 - **Don't:** Don't use where full colour is an option
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-mono-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-mono-colour.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-mono-colour-no-padding.png)
 
 #### Black
 
+![Square logo ENV - Black](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-black.png)
+
 - **Do:** Use on light backgrounds where full colour won't work
 - **Don't:** Never use on dark backgrounds
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-black.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-black.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-black-no-padding.png)
 
 #### White
 
+![Square logo ENV - White](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-white.png)
+
 - **Do:** Use on dark backgrounds where full colour won't work
 - **Don't:** Never use on light backgrounds
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-white.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-white.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-white-no-padding.png)
 
 #### Inverted Mono Colour
 
+![Square logo ENV - Inverted mono colour](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-inverted-mono-colour.png)
+
 - **Do:** Use for social media avatars etc.
 - **Don't:** Don't use in other cases where full colour logo is an option
-- **Formats:** SVG, PNG
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-inverted-mono-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/square-logo-env-inverted-mono-colour.png)
 
 ### Large Format Logos (ENV)
 
 #### Full Colour
 
+![Large logo ENV - Full colour](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-full-colour.png)
+
 - **Do:** Primary brand representation
 - **Don't:** Avoid on coloured backgrounds that conflict
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-full-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-full-colour.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-full-colour-no-padding.png)
 
 #### Mono Colour
 
+![Large logo ENV - Mono colour](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-mono-colour.png)
+
 - **Do:** Use when displayed in small sizes or when full colour isn't an option
 - **Don't:** Don't use where full colour is an option
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-mono-colour.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-mono-colour.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-mono-colour-no-padding.png)
 
 #### Full Colour Dark
 
+![Large logo ENV - Full colour dark](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-full-colour-dark.png)
+
 - **Do:** Use for large displays on dark backgrounds
 - **Don't:** Don't use on light backgrounds or in small sizes - the gradient on the bulb will get lost in the background
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-full-colour-dark.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-full-colour-dark.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-full-colour-dark-no-padding.png)
 
 #### Mono Colour Dark
 
+![Large logo ENV - Mono colour dark](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-mono-colour-dark.png)
+
 - **Do:** Use for smaller displays on dark backgrounds
 - **Don't:** Don't use on light backgrounds
-- **Formats:** SVG, PNG, PNG (no padding)
+- **Downloads:**
+  - [SVG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-mono-colour-dark.svg) |
+  [PNG](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-mono-colour-dark.png) |
+  [PNG (no padding)](https://effective-altruism-australia.github.io/design-guidelines/large-logo-env-mono-colour-dark-no-padding.png)
 
 ---
 
@@ -207,25 +310,35 @@
 
 ### 1. Stacking Text Next to Logo
 
+![Bad example - Stacked text](https://effective-altruism-australia.github.io/design-guidelines/bad-example-stacked-text.png)
+
 - **Don't:** Stack the text next to the logo
 - **Do:** Use standard logo with two lines of text
 
 ### 2. Centre-Justified Text
+
+![Bad example - Centre justified text](https://effective-altruism-australia.github.io/design-guidelines/bad-example-center-justified-text.png)
 
 - **Don't:** Centre-justify the text next to the logo
 - **Do:** Use standard logo with right-aligned text
 
 ### 3. Wrong Font Usage
 
+![Bad example - Wrong font](https://effective-altruism-australia.github.io/design-guidelines/bad-example-wrong-font.png)
+
 - **Don't:** Use other fonts with the logo
 - **Do:** Use Merriweather font
 
 ### 4. Awkward Spacing
 
+![Bad example - Awkward spacing](https://effective-altruism-australia.github.io/design-guidelines/bad-example-awkward-spacing.png)
+
 - **Don't:** Awkwardly space the icon and text
 - **Do:** Use the logos above as a reference
 
 ### 5. Squeezed Text
+
+![Bad example - Squeezed text](https://effective-altruism-australia.github.io/design-guidelines/bad-example-squeezed-text.png)
 
 - **Don't:** Squeeze the text in too close to the logo
 - **Do:** Use the logos above as a reference
