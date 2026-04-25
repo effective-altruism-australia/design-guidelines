@@ -320,6 +320,36 @@
             background-color: #000;
         }
 
+        /* ── Impact icons grid ──────────────────────────── */
+        .impact-gallery {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .impact-card {
+            padding: 18px 16px;
+            text-align: center;
+        }
+
+        .impact-card img {
+            width: 72px;
+            height: 72px;
+            max-height: 72px;
+            margin: 4px auto 12px;
+            border: none;
+            border-radius: 0;
+        }
+
+        .impact-card h3 {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            min-height: 2.4em;
+        }
+
+        .impact-card p {
+            margin: 0;
+        }
+
         /* ── Good / bad text ────────────────────────────── */
         .good { color: var(--good); font-weight: 500; }
         .bad  { color: var(--bad);  font-weight: 500; }
@@ -570,6 +600,7 @@
         /* ── Responsive ─────────────────────────────────── */
         @media (max-width: 900px) {
             .gallery { grid-template-columns: repeat(2, 1fr); }
+            .impact-gallery { grid-template-columns: repeat(3, 1fr); }
             .color-swatches { grid-template-columns: repeat(4, 1fr); }
         }
 
@@ -592,6 +623,7 @@
 
         @media (max-width: 600px) {
             .gallery { grid-template-columns: 1fr; }
+            .impact-gallery { grid-template-columns: repeat(2, 1fr); }
             .color-swatches { grid-template-columns: repeat(3, 1fr); }
         }
 
@@ -705,6 +737,7 @@
                     <li><a href="#large-format-logos">Large Format Logos</a></li>
                     <li><a href="#environmental-logo-variations">Environmental Logo Variations</a></li>
                     <li><a href="#environmental-large-format-logos">Environmental Large Format Logos</a></li>
+                    <li><a href="#impact-icons">Impact Icons</a></li>
                     <li><a href="#bad-examples">Bad Examples</a></li>
                 </ul>
             </nav>
@@ -1317,6 +1350,80 @@
             <p class="good">✓ Use for smaller displays on dark backgrounds</p>
             <p class="bad">✗ Don't use on light backgrounds</p>
             <p><span class="download-link"><a href="large-logo-env-mono-colour-dark.svg" download class="dl-btn">SVG</a><span class="tooltip">Best for web use, large displays, and anywhere you need crisp, scalable graphics</span></span> <span class="download-link"><a href="large-logo-env-mono-colour-dark.png" download class="dl-btn">PNG</a><span class="tooltip">Best for presentations, documents, and email where compatibility is key</span></span> <span class="download-link"><a href="large-logo-env-mono-colour-dark-no-padding.png" download class="dl-btn">PNG (no padding)</a><span class="tooltip">Best for tight layouts where you need precise control over spacing</span></span></p>
+        </div>
+    </div>
+
+    <h2 id="impact-icons">Impact Icons</h2>
+    <div class="gallery impact-gallery">
+        <div class="card impact-card">
+            <img src="against-malaria.svg" alt="Against Malaria Foundation icon">
+            <h3>Against Malaria Foundation</h3>
+            <p><span class="download-link"><a href="against-malaria.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="de-worm.svg" alt="Deworm the World icon">
+            <h3>Deworm the World</h3>
+            <p><span class="download-link"><a href="de-worm.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="eaa-amplify.svg" alt="EAA Amplify icon">
+            <h3>EAA Amplify</h3>
+            <p><span class="download-link"><a href="eaa-amplify.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="eaae.svg" alt="EAAE icon">
+            <h3>EAAE</h3>
+            <p><span class="download-link"><a href="eaae.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="eaae-operations.svg" alt="EAAE Operations icon">
+            <h3>EAAE Operations</h3>
+            <p><span class="download-link"><a href="eaae-operations.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="give-directly.svg" alt="GiveDirectly icon">
+            <h3>GiveDirectly</h3>
+            <p><span class="download-link"><a href="give-directly.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="givewell-all-grants-fund.svg" alt="GiveWell All Grants Fund icon">
+            <h3>GiveWell All Grants Fund</h3>
+            <p><span class="download-link"><a href="givewell-all-grants-fund.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="giving-what-we-can.svg" alt="Giving What We Can icon">
+            <h3>Giving What We Can</h3>
+            <p><span class="download-link"><a href="giving-what-we-can.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="hki.svg" alt="Helen Keller International icon">
+            <h3>Helen Keller International</h3>
+            <p><span class="download-link"><a href="hki.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="malaria-consortium.svg" alt="Malaria Consortium icon">
+            <h3>Malaria Consortium</h3>
+            <p><span class="download-link"><a href="malaria-consortium.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="new-incentives.svg" alt="New Incentives icon">
+            <h3>New Incentives</h3>
+            <p><span class="download-link"><a href="new-incentives.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="one-acre-fund.svg" alt="One Acre Fund icon">
+            <h3>One Acre Fund</h3>
+            <p><span class="download-link"><a href="one-acre-fund.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="strongminds.svg" alt="StrongMinds icon">
+            <h3>StrongMinds</h3>
+            <p><span class="download-link"><a href="strongminds.svg" download class="dl-btn">SVG</a></span></p>
+        </div>
+        <div class="card impact-card">
+            <img src="unlimit.svg" alt="Unlimit Health icon">
+            <h3>Unlimit Health</h3>
+            <p><span class="download-link"><a href="unlimit.svg" download class="dl-btn">SVG</a></span></p>
         </div>
     </div>
 

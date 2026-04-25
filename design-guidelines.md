@@ -306,6 +306,96 @@ Base URL for all assets: `https://effective-altruism-australia.github.io/design-
 
 ---
 
+## Impact Icons
+
+Simple line icons representing the charities and programs supported by EAA.
+
+### Against Malaria Foundation
+
+![Against Malaria Foundation icon](https://effective-altruism-australia.github.io/design-guidelines/against-malaria.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/against-malaria.svg)
+
+### Deworm the World
+
+![Deworm the World icon](https://effective-altruism-australia.github.io/design-guidelines/de-worm.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/de-worm.svg)
+
+### EAA Amplify
+
+![EAA Amplify icon](https://effective-altruism-australia.github.io/design-guidelines/eaa-amplify.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/eaa-amplify.svg)
+
+### EAAE
+
+![EAAE icon](https://effective-altruism-australia.github.io/design-guidelines/eaae.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/eaae.svg)
+
+### EAAE Operations
+
+![EAAE Operations icon](https://effective-altruism-australia.github.io/design-guidelines/eaae-operations.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/eaae-operations.svg)
+
+### GiveDirectly
+
+![GiveDirectly icon](https://effective-altruism-australia.github.io/design-guidelines/give-directly.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/give-directly.svg)
+
+### GiveWell All Grants Fund
+
+![GiveWell All Grants Fund icon](https://effective-altruism-australia.github.io/design-guidelines/givewell-all-grants-fund.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/givewell-all-grants-fund.svg)
+
+### Giving What We Can
+
+![Giving What We Can icon](https://effective-altruism-australia.github.io/design-guidelines/giving-what-we-can.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/giving-what-we-can.svg)
+
+### Helen Keller International
+
+![Helen Keller International icon](https://effective-altruism-australia.github.io/design-guidelines/hki.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/hki.svg)
+
+### Malaria Consortium
+
+![Malaria Consortium icon](https://effective-altruism-australia.github.io/design-guidelines/malaria-consortium.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/malaria-consortium.svg)
+
+### New Incentives
+
+![New Incentives icon](https://effective-altruism-australia.github.io/design-guidelines/new-incentives.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/new-incentives.svg)
+
+### One Acre Fund
+
+![One Acre Fund icon](https://effective-altruism-australia.github.io/design-guidelines/one-acre-fund.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/one-acre-fund.svg)
+
+### StrongMinds
+
+![StrongMinds icon](https://effective-altruism-australia.github.io/design-guidelines/strongminds.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/strongminds.svg)
+
+### Unlimit Health
+
+![Unlimit Health icon](https://effective-altruism-australia.github.io/design-guidelines/unlimit.svg)
+
+- **Download:** [SVG](https://effective-altruism-australia.github.io/design-guidelines/unlimit.svg)
+
+---
+
 ## Bad Examples - What Not to Do
 
 ### 1. Stacking Text Next to Logo
