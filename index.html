@@ -1489,20 +1489,27 @@
         document.querySelectorAll('.card').forEach(card => cardObserver.observe(card));
 
         // ── Active nav link tracking ─────────────────────────────────────
-        const sections = document.querySelectorAll('h2[id]');
+        const sections = Array.from(document.querySelectorAll('h2[id]'));
         const navLinks = document.querySelectorAll('.quick-nav a');
 
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    const active = document.querySelector(`.quick-nav a[href="#${entry.target.id}"]`);
-                    if (active) active.classList.add('active');
+        function updateActiveNav() {
+            const offset = 80;
+            let currentId = sections[0]?.id;
+            for (const s of sections) {
+                if (s.getBoundingClientRect().top - offset <= 0) {
+                    currentId = s.id;
+                } else {
+                    break;
                 }
+            }
+            navLinks.forEach(l => {
+                l.classList.toggle('active', l.getAttribute('href') === `#${currentId}`);
             });
-        }, { rootMargin: '-15% 0px -72% 0px', threshold: 0 });
+        }
 
-        sections.forEach(s => sectionObserver.observe(s));
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        window.addEventListener('resize', updateActiveNav);
+        updateActiveNav();
     </script>
 
     <script>
