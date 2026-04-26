@@ -338,6 +338,13 @@
             margin: 4px auto 12px;
             border: none;
             border-radius: 0;
+            transition: background-color 0.2s var(--ease), box-shadow 0.2s var(--ease), border-radius 0.2s var(--ease);
+        }
+
+        .impact-gallery.is-light-icon .impact-card img {
+            background-color: var(--dark);
+            box-shadow: 0 0 0 10px var(--dark);
+            border-radius: 8px;
         }
 
         .impact-card h3 {
@@ -348,6 +355,103 @@
 
         .impact-card p {
             margin: 0;
+        }
+
+        /* ── Impact icon controls ───────────────────────── */
+        .impact-controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 18px;
+            padding: 14px 18px;
+            background: var(--white);
+            border: 1px solid rgba(20,85,101,0.12);
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .impact-controls__group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .impact-controls__label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .impact-controls__color-input {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border: 1px solid rgba(20,85,101,0.25);
+            border-radius: 8px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .impact-controls__color-input::-webkit-color-swatch-wrapper { padding: 2px; }
+        .impact-controls__color-input::-webkit-color-swatch { border: none; border-radius: 6px; }
+        .impact-controls__color-input::-moz-color-swatch { border: none; border-radius: 6px; }
+
+        .impact-controls__presets {
+            display: flex;
+            gap: 8px;
+        }
+
+        .impact-controls__swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid rgba(20,85,101,0.2);
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
+        }
+
+        .impact-controls__swatch:hover { transform: scale(1.12); }
+        .impact-controls__swatch.active {
+            box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--primary);
+        }
+
+        .impact-controls__download-group {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .impact-controls__download-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--white);
+            background: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.18s var(--ease), border-color 0.18s var(--ease);
+        }
+
+        .impact-controls__download-all:hover {
+            background: var(--dark);
+            border-color: var(--dark);
+        }
+
+        .impact-controls__download-all:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 700px) {
+            .impact-controls__download-group { margin-left: 0; }
         }
 
         /* ── Good / bad text ────────────────────────────── */
@@ -539,16 +643,21 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            font-family: inherit;
             font-size: 0.8rem;
             font-weight: 500;
+            line-height: inherit;
             color: var(--primary);
             text-decoration: none;
             background: rgba(12,134,155,0.08);
             border: 1px solid rgba(12,134,155,0.2);
             padding: 4px 10px;
             border-radius: 20px;
+            cursor: pointer;
             transition: background 0.18s var(--ease), color 0.18s var(--ease);
         }
+
+        .dl-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .dl-btn:hover {
             background: var(--primary);
@@ -1354,6 +1463,26 @@
     </div>
 
     <h2 id="impact-icons">Impact Icons</h2>
+    <div class="impact-controls">
+        <div class="impact-controls__group">
+            <label class="impact-controls__label" for="impact-color">Icon colour</label>
+            <input type="color" id="impact-color" class="impact-controls__color-input" value="#000000" aria-label="Pick icon colour">
+        </div>
+        <div class="impact-controls__group">
+            <span class="impact-controls__label">Presets</span>
+            <div class="impact-controls__presets" id="impact-presets"></div>
+        </div>
+        <div class="impact-controls__download-group">
+            <button type="button" id="impact-download-all-svg" class="impact-controls__download-all">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                All SVG (.zip)
+            </button>
+            <button type="button" id="impact-download-all-png" class="impact-controls__download-all">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                All PNG (.zip)
+            </button>
+        </div>
+    </div>
     <div class="gallery impact-gallery">
         <div class="card impact-card">
             <img src="against-malaria.svg" alt="Against Malaria Foundation icon">
@@ -1528,6 +1657,215 @@
                 setTimeout(() => { btn.textContent = 'Copy as Markdown'; }, 2000);
             }
         }
+    </script>
+
+    <script>
+        // ── Impact icon recolour & bulk download ─────────────
+        (function() {
+            const PRESETS = [
+                { name: 'Black',       value: '#000000' },
+                { name: 'Primary',     value: '#0C869B' },
+                { name: 'Dark',        value: '#145565' },
+                { name: 'Dark deeper', value: '#073845' },
+                { name: 'White',       value: '#FFFFFF' }
+            ];
+
+            function isLight(hex) {
+                const m = /^#?([a-f\d]{6})$/i.exec(hex);
+                if (!m) return false;
+                const n = parseInt(m[1], 16);
+                const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+                return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.85;
+            }
+
+            const PNG_SIZE = 1024;
+
+            const cards = Array.from(document.querySelectorAll('.impact-card'));
+            const gallery = document.querySelector('.impact-gallery');
+            const colorInput = document.getElementById('impact-color');
+            const presetsContainer = document.getElementById('impact-presets');
+            const downloadAllSvgBtn = document.getElementById('impact-download-all-svg');
+            const downloadAllPngBtn = document.getElementById('impact-download-all-png');
+            if (!cards.length || !gallery || !colorInput || !presetsContainer || !downloadAllSvgBtn || !downloadAllPngBtn) return;
+
+            const sources = new Map();
+            const blobUrls = new Map();
+            let currentColor = colorInput.value || '#000000';
+
+            PRESETS.forEach(preset => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'impact-controls__swatch';
+                btn.style.background = preset.value;
+                btn.title = preset.name;
+                btn.dataset.color = preset.value;
+                btn.setAttribute('aria-label', `Set icon colour to ${preset.name}`);
+                btn.addEventListener('click', () => setColor(preset.value));
+                presetsContainer.appendChild(btn);
+            });
+
+            // Add a PNG download button next to each card's SVG link
+            cards.forEach(card => {
+                const svgLink = card.querySelector('a.dl-btn');
+                if (!svgLink || card.querySelector('button.dl-btn[data-format="png"]')) return;
+                const pngBtn = document.createElement('button');
+                pngBtn.type = 'button';
+                pngBtn.className = 'dl-btn';
+                pngBtn.dataset.format = 'png';
+                pngBtn.textContent = 'PNG';
+                pngBtn.addEventListener('click', async () => {
+                    const file = fileFor(card);
+                    const original = file && sources.get(file);
+                    if (!original) return;
+                    const originalText = pngBtn.textContent;
+                    pngBtn.disabled = true;
+                    pngBtn.textContent = '…';
+                    try {
+                        const png = await svgToPng(recolor(original, currentColor), PNG_SIZE);
+                        triggerDownload(png, file.replace(/\.svg$/i, '.png'));
+                        pngBtn.textContent = originalText;
+                    } catch (e) {
+                        pngBtn.textContent = 'Failed';
+                        setTimeout(() => { pngBtn.textContent = originalText; }, 1500);
+                    } finally {
+                        pngBtn.disabled = false;
+                    }
+                });
+                svgLink.insertAdjacentText('afterend', ' ');
+                svgLink.insertAdjacentElement('afterend', pngBtn);
+            });
+
+            function recolor(svgText, color) {
+                return svgText
+                    .split('stroke="black"').join(`stroke="${color}"`)
+                    .split('fill="black"').join(`fill="${color}"`);
+            }
+
+            function svgToPng(svgText, size) {
+                return new Promise((resolve, reject) => {
+                    const blob = new Blob([svgText], { type: 'image/svg+xml' });
+                    const url = URL.createObjectURL(blob);
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = size;
+                        canvas.height = size;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, size, size);
+                        URL.revokeObjectURL(url);
+                        canvas.toBlob(b => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/png');
+                    };
+                    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('image load failed')); };
+                    img.src = url;
+                });
+            }
+
+            function triggerDownload(blob, filename) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+            }
+
+            function fileFor(card) {
+                const img = card.querySelector('img');
+                if (!img) return null;
+                if (!img.dataset.iconFile) {
+                    const src = img.getAttribute('src') || '';
+                    img.dataset.iconFile = src.split('/').pop().split('?')[0];
+                }
+                return img.dataset.iconFile || null;
+            }
+
+            function applyColor(color) {
+                cards.forEach(card => {
+                    const file = fileFor(card);
+                    const original = file && sources.get(file);
+                    if (!original) return;
+                    const recolored = recolor(original, color);
+                    const blob = new Blob([recolored], { type: 'image/svg+xml' });
+                    const previous = blobUrls.get(file);
+                    if (previous) URL.revokeObjectURL(previous);
+                    const url = URL.createObjectURL(blob);
+                    blobUrls.set(file, url);
+                    const img = card.querySelector('img');
+                    if (img) img.src = url;
+                    const link = card.querySelector('a.dl-btn');
+                    if (link) {
+                        link.href = url;
+                        link.setAttribute('download', file);
+                    }
+                });
+            }
+
+            function setColor(color) {
+                currentColor = color;
+                colorInput.value = color;
+                gallery.classList.toggle('is-light-icon', isLight(color));
+                presetsContainer.querySelectorAll('.impact-controls__swatch').forEach(b => {
+                    b.classList.toggle('active', b.dataset.color.toLowerCase() === color.toLowerCase());
+                });
+                applyColor(color);
+            }
+
+            colorInput.addEventListener('input', e => setColor(e.target.value));
+
+            const files = cards.map(fileFor).filter(Boolean);
+            Promise.all(files.map(file =>
+                fetch(file).then(r => r.text()).then(text => sources.set(file, text)).catch(() => null)
+            )).then(() => setColor(currentColor));
+
+            let jsZipPromise = null;
+            function loadJSZip() {
+                if (!jsZipPromise) {
+                    jsZipPromise = new Promise((resolve, reject) => {
+                        const s = document.createElement('script');
+                        s.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';
+                        s.onload = () => resolve(window.JSZip);
+                        s.onerror = reject;
+                        document.head.appendChild(s);
+                    });
+                }
+                return jsZipPromise;
+            }
+
+            async function downloadAll(format, btn) {
+                const originalHTML = btn.innerHTML;
+                btn.disabled = true;
+                btn.textContent = 'Preparing…';
+                try {
+                    const JSZip = await loadJSZip();
+                    const zip = new JSZip();
+                    for (const file of files) {
+                        const original = sources.get(file);
+                        if (!original) continue;
+                        const recolored = recolor(original, currentColor);
+                        if (format === 'svg') {
+                            zip.file(file, recolored);
+                        } else {
+                            const png = await svgToPng(recolored, PNG_SIZE);
+                            zip.file(file.replace(/\.svg$/i, '.png'), png);
+                        }
+                    }
+                    const blob = await zip.generateAsync({ type: 'blob' });
+                    triggerDownload(blob, `impact-icons-${format}-${currentColor.replace('#','')}.zip`);
+                    btn.textContent = 'Downloaded!';
+                } catch (e) {
+                    btn.textContent = 'Download failed';
+                }
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                }, 1800);
+            }
+
+            downloadAllSvgBtn.addEventListener('click', () => downloadAll('svg', downloadAllSvgBtn));
+            downloadAllPngBtn.addEventListener('click', () => downloadAll('png', downloadAllPngBtn));
+        })();
     </script>
 </body>
 </html>
