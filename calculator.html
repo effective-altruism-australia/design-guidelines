@@ -4,21 +4,45 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Donation Calculator — Effective Altruism Australia</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  :root {
+  /* Demo-page wrapper only. Not part of the embed. */
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #f9f6f3;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 48px;
+    font-family: Arial, sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<!-- ───── EMBED SNIPPET — paste into a WordPress Custom HTML block ─────
+     Everything inside the shadow root is style-isolated from the page. -->
+<div id="eaa-donate-calculator"></div>
+
+<template id="eaa-donate-calculator-template">
+<style>
+  :host {
+    all: initial;
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    font-family: 'Mukta', Arial, sans-serif;
+    color: #151515;
+    line-height: 1.5;
+    box-sizing: border-box;
+
     --primary:      #0C869B;
     --dark:         #145565;
-    --dark-deeper:  #073845;
     --warm-white:   #F4EFE9;
     --charcoal:     #151515;
     --white:        #FFFFFF;
-    --bg:           #f9f6f3;
     --teal-50:      #ecffff;
-    --teal-100:     #cefeff;
-    --teal-700:     #0c869b;
     --bronze-100:   #f4efe9;
     --bronze-200:   #e2d4c6;
     --grey-200:     #d1d1d1;
@@ -26,7 +50,6 @@
 
     --shadow-sm:  0 1px 3px rgba(20,85,101,0.07), 0 2px 8px rgba(20,85,101,0.06);
     --shadow-md:  0 4px 16px rgba(20,85,101,0.12), 0 1px 4px rgba(20,85,101,0.07);
-    --shadow-lg:  0 8px 32px rgba(20,85,101,0.16);
 
     --radius:     16px;
     --radius-sm:  8px;
@@ -35,46 +58,10 @@
     --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  * { box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; }
 
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font-family: 'Mukta', Arial, sans-serif;
-    background: var(--bg);
-    color: var(--charcoal);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px 16px 48px;
-    line-height: 1.5;
-  }
-
-  .header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    width: 100%;
-    max-width: 720px;
-  }
-
-  .header img {
-    height: 44px;
-    width: auto;
-  }
-
-  .header .brand {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    color: var(--dark);
-    font-size: 1.05rem;
-    line-height: 1.2;
-  }
+  .header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; width: 100%; }
+  .header img { height: 44px; width: auto; }
 
   .card {
     background: var(--white);
@@ -82,11 +69,10 @@
     box-shadow: var(--shadow-md);
     padding: 32px 24px;
     width: 100%;
-    max-width: 720px;
   }
 
   h1 {
-    font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', Georgia, serif;
     color: var(--dark);
     font-size: clamp(1.5rem, 4vw, 2.25rem);
     margin: 0 0 8px;
@@ -94,18 +80,9 @@
     line-height: 1.2;
   }
 
-  .subtitle {
-    color: var(--grey-500);
-    margin: 0 0 28px;
-    font-size: 1rem;
-  }
+  .subtitle { color: var(--grey-500); margin: 0 0 28px; font-size: 1rem; }
 
-  .tiers {
-    display: flex;
-    align-items: stretch;
-    gap: 8px;
-    margin-bottom: 28px;
-  }
+  .tiers { display: flex; align-items: stretch; gap: 8px; margin-bottom: 28px; }
 
   .tier {
     flex: 1 1 0;
@@ -121,7 +98,7 @@
   .tier-or {
     flex: 0 0 auto;
     align-self: center;
-    font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', Georgia, serif;
     font-weight: 700;
     font-size: 0.85rem;
     color: var(--grey-500);
@@ -140,18 +117,14 @@
   }
 
   .tier .label {
-    font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', Georgia, serif;
     color: var(--dark);
     font-weight: 700;
     margin-top: 8px;
     font-size: 0.95rem;
   }
 
-  .tier .range {
-    color: var(--grey-500);
-    font-size: 0.8rem;
-    margin-top: 2px;
-  }
+  .tier .range { color: var(--grey-500); font-size: 0.8rem; margin-top: 2px; }
 
   .tier.active {
     background: var(--teal-50);
@@ -159,15 +132,9 @@
     box-shadow: var(--shadow-sm);
   }
 
-  .tier.active svg {
-    opacity: 1;
-    transform: scale(1.05);
-  }
+  .tier.active svg { opacity: 1; transform: scale(1.05); }
 
-  .amount-display {
-    text-align: center;
-    margin-bottom: 24px;
-  }
+  .amount-display { text-align: center; margin-bottom: 24px; }
 
   .amount-label {
     color: var(--grey-500);
@@ -178,7 +145,7 @@
   }
 
   .amount-value {
-    font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', Georgia, serif;
     color: var(--dark);
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 900;
@@ -221,9 +188,7 @@
     box-shadow: var(--shadow-sm);
   }
 
-  .slider-wrap {
-    margin: 24px 0;
-  }
+  .slider-wrap { margin: 24px 0; }
 
   input[type="range"] {
     -webkit-appearance: none;
@@ -234,6 +199,7 @@
     background: var(--bronze-200);
     outline: none;
     margin: 0;
+    padding: 0;
   }
 
   input[type="range"]::-webkit-slider-thumb {
@@ -250,9 +216,7 @@
   }
 
   input[type="range"]::-webkit-slider-thumb:hover,
-  input[type="range"]::-webkit-slider-thumb:active {
-    transform: scale(1.15);
-  }
+  input[type="range"]::-webkit-slider-thumb:active { transform: scale(1.15); }
 
   input[type="range"]::-moz-range-thumb {
     width: 28px;
@@ -293,10 +257,7 @@
     transition: all 0.2s var(--ease);
   }
 
-  .preset:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
+  .preset:hover { border-color: var(--primary); color: var(--primary); }
 
   .preset.active {
     background: var(--primary);
@@ -311,7 +272,7 @@
     color: var(--white);
     text-align: center;
     text-decoration: none;
-    font-family: 'Merriweather', serif;
+    font-family: 'Merriweather', Georgia, serif;
     font-weight: 700;
     font-size: 1.1rem;
     padding: 18px 24px;
@@ -328,9 +289,7 @@
     transform: translateY(-1px);
   }
 
-  .donate-btn:active {
-    transform: translateY(0);
-  }
+  .donate-btn:active { transform: translateY(0); }
 
   .footnote {
     text-align: center;
@@ -339,21 +298,17 @@
     margin-top: 16px;
   }
 
-  /* Tablet */
   @media (min-width: 600px) {
-    body { padding: 40px 24px; }
     .card { padding: 40px 40px; }
     .tier { padding: 20px 12px; }
     .tier svg { max-width: 90px; }
   }
 
-  /* Desktop */
   @media (min-width: 900px) {
     .card { padding: 48px 56px; }
     .tier svg { max-width: 100px; }
   }
 
-  /* Small phones */
   @media (max-width: 380px) {
     .card { padding: 24px 16px; }
     .tier { padding: 12px 4px; }
@@ -362,8 +317,6 @@
     .preset { padding: 6px 12px; font-size: 0.85rem; }
   }
 </style>
-</head>
-<body>
 
 <header class="header">
   <img src="https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour.svg" alt="Effective Altruism Australia" />
@@ -464,7 +417,7 @@
 
   <div class="amount-display">
     <div class="amount-label">Your donation</div>
-    <div class="amount-value"><span class="currency">$</span><span id="amount">50</span></div>
+    <div class="amount-value"><span class="currency">$</span><span data-role="amount">50</span></div>
     <div class="frequency" role="group" aria-label="Donation frequency">
       <button type="button" data-freq="once" class="active">One-off</button>
       <button type="button" data-freq="monthly">Monthly</button>
@@ -472,7 +425,7 @@
   </div>
 
   <div class="slider-wrap">
-    <input type="range" id="slider" min="5" max="2000" step="5" value="50" aria-label="Donation amount" />
+    <input type="range" data-role="slider" min="5" max="2000" step="5" value="50" aria-label="Donation amount" />
     <div class="slider-bounds">
       <span>$5</span>
       <span>$2,000</span>
@@ -488,69 +441,88 @@
     <button type="button" class="preset" data-amount="1000">$1,000</button>
   </div>
 
-  <a id="donate" class="donate-btn" href="https://effectivealtruism.org.au/donate/?amount=50" target="_blank" rel="noopener">
+  <a data-role="donate" class="donate-btn" href="https://effectivealtruism.org.au/donate/?amount=50" target="_blank" rel="noopener">
     Donate $50
   </a>
 
   <p class="footnote">Donations are tax-deductible in Australia.</p>
 </main>
+</template>
 
 <script>
-  (function () {
-    const slider   = document.getElementById('slider');
-    const amountEl = document.getElementById('amount');
-    const donate   = document.getElementById('donate');
-    const tiers    = document.querySelectorAll('.tier');
-    const presets  = document.querySelectorAll('.preset');
-    const freqBtns = document.querySelectorAll('.frequency button');
+(function () {
+  // Load Merriweather + Mukta into the parent document once.
+  // Fonts cross shadow boundaries automatically, so this works for the embed.
+  if (!document.querySelector('link[data-eaa-fonts]')) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Mukta:wght@300;400;500;600;700&display=swap';
+    link.setAttribute('data-eaa-fonts', '');
+    document.head.appendChild(link);
+  }
 
-    let frequency = 'once';
+  const host = document.getElementById('eaa-donate-calculator');
+  const tpl  = document.getElementById('eaa-donate-calculator-template');
+  if (!host || !tpl) return;
 
-    const formatCurrency = (n) => n.toLocaleString('en-AU');
+  const root = host.attachShadow({ mode: 'open' });
+  root.appendChild(tpl.content.cloneNode(true));
 
-    function activeTierIndex(amount) {
-      if (amount < 100)  return 0;
-      if (amount < 500)  return 1;
-      return 2;
-    }
+  const slider   = root.querySelector('[data-role="slider"]');
+  const amountEl = root.querySelector('[data-role="amount"]');
+  const donate   = root.querySelector('[data-role="donate"]');
+  const tiers    = root.querySelectorAll('.tier');
+  const presets  = root.querySelectorAll('.preset');
+  const freqBtns = root.querySelectorAll('.frequency button');
 
-    function update(amount) {
-      const value = Math.max(parseInt(slider.min, 10), parseInt(amount, 10) || 0);
-      amountEl.textContent = formatCurrency(value);
-      donate.textContent = `Donate $${formatCurrency(value)}${frequency === 'monthly' ? '/month' : ''}`;
-      const params = new URLSearchParams({ amount: String(value) });
-      if (frequency === 'monthly') params.set('frequency', 'monthly');
-      donate.href = `https://effectivealtruism.org.au/donate/?${params.toString()}`;
+  let frequency = 'once';
 
-      const tierIdx = activeTierIndex(value);
-      tiers.forEach((t, i) => t.classList.toggle('active', i === tierIdx));
+  const formatCurrency = (n) => n.toLocaleString('en-AU');
 
-      presets.forEach((p) =>
-        p.classList.toggle('active', parseInt(p.dataset.amount, 10) === value)
-      );
-    }
+  function activeTierIndex(amount) {
+    if (amount < 100) return 0;
+    if (amount < 500) return 1;
+    return 2;
+  }
 
-    slider.addEventListener('input', (e) => update(e.target.value));
+  function update(amount) {
+    const value = Math.max(parseInt(slider.min, 10), parseInt(amount, 10) || 0);
+    amountEl.textContent = formatCurrency(value);
+    donate.textContent = `Donate $${formatCurrency(value)}${frequency === 'monthly' ? '/month' : ''}`;
+    const params = new URLSearchParams({ amount: String(value) });
+    if (frequency === 'monthly') params.set('frequency', 'monthly');
+    donate.href = `https://effectivealtruism.org.au/donate/?${params.toString()}`;
 
-    presets.forEach((p) => {
-      p.addEventListener('click', () => {
-        const v = parseInt(p.dataset.amount, 10);
-        slider.value = Math.min(parseInt(slider.max, 10), v);
-        update(v);
-      });
+    const tierIdx = activeTierIndex(value);
+    tiers.forEach((t, i) => t.classList.toggle('active', i === tierIdx));
+
+    presets.forEach((p) =>
+      p.classList.toggle('active', parseInt(p.dataset.amount, 10) === value)
+    );
+  }
+
+  slider.addEventListener('input', (e) => update(e.target.value));
+
+  presets.forEach((p) => {
+    p.addEventListener('click', () => {
+      const v = parseInt(p.dataset.amount, 10);
+      slider.value = Math.min(parseInt(slider.max, 10), v);
+      update(v);
     });
+  });
 
-    freqBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        freqBtns.forEach((b) => b.classList.toggle('active', b === btn));
-        frequency = btn.dataset.freq;
-        update(slider.value);
-      });
+  freqBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      freqBtns.forEach((b) => b.classList.toggle('active', b === btn));
+      frequency = btn.dataset.freq;
+      update(slider.value);
     });
+  });
 
-    update(slider.value);
-  })();
+  update(slider.value);
+})();
 </script>
+<!-- ───── EMBED SNIPPET END ───── -->
 
 </body>
 </html>
