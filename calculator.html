@@ -269,19 +269,19 @@
 <div class="outcomes">
   <div class="outcome">
     <img src="https://effective-altruism-australia.github.io/design-guidelines/against-malaria.svg" alt="" />
-    <div class="number" data-role="malaria">3,500</div>
+    <div class="number" data-role="malaria">6,000</div>
     <div class="desc">people protected from Malaria</div>
   </div>
   <div class="outcome-or" aria-hidden="true">or</div>
   <div class="outcome">
     <img src="https://effective-altruism-australia.github.io/design-guidelines/hki.svg" alt="" />
-    <div class="number" data-role="blindness">1,750</div>
+    <div class="number" data-role="blindness">2,909</div>
     <div class="desc">children protected from Blindness</div>
   </div>
   <div class="outcome-or" aria-hidden="true">or</div>
   <div class="outcome">
     <img src="https://effective-altruism-australia.github.io/design-guidelines/new-incentives.svg" alt="" />
-    <div class="number" data-role="vaccinated">30</div>
+    <div class="number" data-role="vaccinated">41</div>
     <div class="desc">children vaccinated against disease</div>
   </div>
 </div>
@@ -319,11 +319,14 @@
   const vaxEl      = root.querySelector('[data-role="vaccinated"]');
   const donate     = root.querySelector('[data-role="donate"]');
 
-  // Outcome ratios calibrated so $9,600 → 3,500 / 1,750 / 30 (matches design).
-  const PER_DOLLAR = {
-    malaria:    3500 / 9600,
-    blindness:  1750 / 9600,
-    vaccinated:   30 / 9600,
+  // Cost per outcome (AUD).
+  //   AMF:           $1.6  per person protected from malaria by an ITN
+  //   HKI:           $3.3  per child given Vitamin A supplements
+  //   New Incentives:$233.6 per baby vaccinated who otherwise wouldn't have been
+  const COST = {
+    malaria:    1.6,
+    blindness:  3.3,
+    vaccinated: 233.6,
   };
 
   const fmt = (n) => n.toLocaleString('en-AU');
@@ -337,16 +340,14 @@
     slider.style.setProperty('--pct', (pct * 100) + '%');
 
     bubble.textContent = '$' + fmt(value);
-    // Position bubble over the thumb. The thumb visually travels from
-    // (thumbW/2) to (trackW - thumbW/2) of the track width.
     const thumbW = 22;
     const trackW = slider.getBoundingClientRect().width;
     const thumbCenter = pct * (trackW - thumbW) + thumbW / 2;
     bubble.style.left = thumbCenter + 'px';
 
-    malariaEl.textContent = fmt(Math.round(value * PER_DOLLAR.malaria));
-    blindEl.textContent   = fmt(Math.round(value * PER_DOLLAR.blindness));
-    vaxEl.textContent     = fmt(Math.round(value * PER_DOLLAR.vaccinated));
+    malariaEl.textContent = fmt(Math.floor(value / COST.malaria));
+    blindEl.textContent   = fmt(Math.floor(value / COST.blindness));
+    vaxEl.textContent     = fmt(Math.floor(value / COST.vaccinated));
 
     donate.href = 'https://effectivealtruism.org.au/donate/?amount=' + value;
   }
