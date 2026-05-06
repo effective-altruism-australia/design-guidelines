@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Donation Calculator — Effective Altruism Australia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --primary:      #0C869B;
+    --dark:         #145565;
+    --dark-deeper:  #073845;
+    --warm-white:   #F4EFE9;
+    --charcoal:     #151515;
+    --white:        #FFFFFF;
+    --bg:           #f9f6f3;
+    --teal-50:      #ecffff;
+    --teal-100:     #cefeff;
+    --teal-700:     #0c869b;
+    --bronze-100:   #f4efe9;
+    --bronze-200:   #e2d4c6;
+    --grey-200:     #d1d1d1;
+    --grey-500:     #6d6d6d;
+
+    --shadow-sm:  0 1px 3px rgba(20,85,101,0.07), 0 2px 8px rgba(20,85,101,0.06);
+    --shadow-md:  0 4px 16px rgba(20,85,101,0.12), 0 1px 4px rgba(20,85,101,0.07);
+    --shadow-lg:  0 8px 32px rgba(20,85,101,0.16);
+
+    --radius:     16px;
+    --radius-sm:  8px;
+    --radius-xs:  5px;
+
+    --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Mukta', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--charcoal);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 48px;
+    line-height: 1.5;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .header img {
+    height: 44px;
+    width: auto;
+  }
+
+  .header .brand {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    color: var(--dark);
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 720px;
+  }
+
+  h1 {
+    font-family: 'Merriweather', serif;
+    color: var(--dark);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    margin: 0 0 8px;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    color: var(--grey-500);
+    margin: 0 0 28px;
+    font-size: 1rem;
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .tier {
+    background: var(--bronze-100);
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 16px 8px;
+    text-align: center;
+    transition: all 0.3s var(--ease);
+  }
+
+  .tier svg {
+    width: 100%;
+    max-width: 80px;
+    height: auto;
+    opacity: 0.45;
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+
+  .tier .label {
+    font-family: 'Merriweather', serif;
+    color: var(--dark);
+    font-weight: 700;
+    margin-top: 8px;
+    font-size: 0.95rem;
+  }
+
+  .tier .range {
+    color: var(--grey-500);
+    font-size: 0.8rem;
+    margin-top: 2px;
+  }
+
+  .tier.active {
+    background: var(--teal-50);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tier.active svg {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .amount-display {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .amount-label {
+    color: var(--grey-500);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  .amount-value {
+    font-family: 'Merriweather', serif;
+    color: var(--dark);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-top: 6px;
+  }
+
+  .amount-value .currency {
+    font-size: 0.6em;
+    vertical-align: super;
+    color: var(--primary);
+    margin-right: 4px;
+  }
+
+  .frequency {
+    display: inline-flex;
+    background: var(--bronze-100);
+    border-radius: 999px;
+    padding: 4px;
+    margin: 8px auto 0;
+    gap: 4px;
+  }
+
+  .frequency button {
+    background: transparent;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--grey-500);
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+  }
+
+  .frequency button.active {
+    background: var(--white);
+    color: var(--dark);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .slider-wrap {
+    margin: 24px 0;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--bronze-200);
+    outline: none;
+    margin: 0;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 4px solid var(--white);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: transform 0.15s var(--ease);
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover,
+  input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(1.15);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 4px solid var(--white);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+  }
+
+  .slider-bounds {
+    display: flex;
+    justify-content: space-between;
+    color: var(--grey-500);
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+
+  .presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .preset {
+    background: var(--white);
+    border: 1.5px solid var(--grey-200);
+    border-radius: var(--radius-xs);
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark);
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+  }
+
+  .preset:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .preset.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+  }
+
+  .donate-btn {
+    display: block;
+    width: 100%;
+    background: var(--primary);
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 18px 24px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .donate-btn:hover {
+    background: var(--dark);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+
+  .donate-btn:active {
+    transform: translateY(0);
+  }
+
+  .footnote {
+    text-align: center;
+    color: var(--grey-500);
+    font-size: 0.85rem;
+    margin-top: 16px;
+  }
+
+  /* Tablet */
+  @media (min-width: 600px) {
+    body { padding: 40px 24px; }
+    .card { padding: 40px 40px; }
+    .tier { padding: 20px 12px; }
+    .tier svg { max-width: 90px; }
+  }
+
+  /* Desktop */
+  @media (min-width: 900px) {
+    .card { padding: 48px 56px; }
+    .tier svg { max-width: 100px; }
+  }
+
+  /* Small phones */
+  @media (max-width: 380px) {
+    .card { padding: 24px 16px; }
+    .tier { padding: 12px 4px; }
+    .tier .label { font-size: 0.85rem; }
+    .tier .range { font-size: 0.7rem; }
+    .preset { padding: 6px 12px; font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <img src="https://effective-altruism-australia.github.io/design-guidelines/large-logo-full-colour.svg" alt="Effective Altruism Australia" />
+</header>
+
+<main class="card">
+  <h1>Choose your impact</h1>
+  <p class="subtitle">Slide to select an amount. Every dollar goes to high-impact charities.</p>
+
+  <div class="tiers" role="group" aria-label="Donation tier illustrations">
+    <div class="tier" data-tier="0">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M49.5208 20.5C55.9553 20.5 61.732 21.1272 65.8577 22.1172C67.9322 22.615 69.5058 23.1857 70.5247 23.7637C71.3944 24.2571 71.5742 24.584 71.6106 24.6631C71.5742 24.7421 71.3947 25.0689 70.5247 25.5625C69.5058 26.1405 67.9322 26.7112 65.8577 27.209C61.732 28.199 55.9553 28.8262 49.5208 28.8262C43.0861 28.8262 37.3086 28.199 33.1829 27.209C31.1083 26.7111 29.5346 26.1405 28.5159 25.5625C27.644 25.0678 27.4647 24.7411 27.429 24.6631C27.4648 24.585 27.6442 24.2582 28.5159 23.7637C29.5346 23.1857 31.1083 22.615 33.1829 22.1172C37.3086 21.1271 43.0861 20.5 49.5208 20.5Z" stroke="#145565" stroke-width="3"/>
+        <path d="M29.068 25.9216C11.813 45.4283 7.04181 60.5298 7.04181 77.5193C7.04181 85.6995 13.335 83.8117 47.161 83.8117C84.9201 83.8117 92 85.0702 92 78.1486C92 58.0129 85.5891 44.293 69.9738 26.5508" stroke="#145565" stroke-width="3"/>
+        <path d="M33.2633 28.2288C23.546 43.8354 18.6263 57.0369 16.4815 70.178" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M82.5597 70.178C80.2071 55.6744 74.8826 43.1423 65.778 28.2288" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M69.5399 56.3632C70.6199 47.2513 68.9505 37.9441 64.0335 28.2288" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M34.929 28.2288C30.5875 37.7598 28.2099 47.0842 28.1379 56.3632" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <rect x="14.3837" y="70.178" width="70.2736" height="9.22881" rx="1" stroke="#145565" stroke-width="3"/>
+        <path d="M35.6837 56.8359H26.9883L14.3404 70.418" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M62.8479 56.8359H70.9436L84.1912 70.418" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <rect x="35.6837" y="49.0746" width="26.1941" height="10.6717" rx="2" stroke="#145565" stroke-width="3"/>
+        <path d="M81.949 17.6749L78.1608 21.4632" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M91.5795 8.14459C91.5599 8.42992 91.4457 8.87413 91.1687 9.46421C90.6185 10.6356 89.5619 12.092 88.0967 13.4974C86.6317 14.9026 85.1331 15.8971 83.9399 16.398C83.3383 16.6505 82.8895 16.7465 82.6036 16.7541C82.5686 16.7551 82.5387 16.7513 82.5132 16.7502C82.5131 16.7248 82.5113 16.695 82.5137 16.6604C82.5332 16.3751 82.6479 15.9306 82.9252 15.3401C83.4753 14.1688 84.5314 12.7129 85.9964 11.3076C87.4615 9.9023 88.9607 8.90722 90.154 8.40636C90.7551 8.15407 91.2037 8.05856 91.4896 8.05085C91.5243 8.04993 91.5546 8.05234 91.58 8.05343C91.58 8.07903 91.5819 8.10961 91.5795 8.14459Z" stroke="#145565" stroke-width="3"/>
+        <path d="M87.6869 1.7088C87.3298 3.78827 87.2003 5.62216 85.7927 7.39122L86.5504 8.90654" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M83.8432 24.8709C84.2466 22.7999 84.4171 20.9694 85.8637 19.2322L85.1401 17.7003" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M74.3191 16.989C76.3063 16.2801 78.0907 15.8374 79.5917 14.147L81.2146 14.6331" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M97.7511 13.1325C95.6412 13.1504 93.8104 12.9833 91.8379 14.0879L90.4642 13.0964" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <mask id="m1-1" fill="white"><ellipse cx="92.928" cy="21.1853" rx="2.27297" ry="6.81891" transform="rotate(137.457 92.928 21.1853)"/></mask>
+        <path d="M91.2533 22.7222L93.4636 20.6938C92.3478 19.4779 91.5893 18.3151 91.222 17.4942C91.0315 17.0687 91.0165 16.8904 91.0194 16.9294C91.0217 16.96 91.0328 17.1356 90.9586 17.3957C90.8784 17.6768 90.6988 18.0478 90.3458 18.3717L88.3174 16.1614L86.2889 13.9511C85.0902 15.0512 84.9707 16.5073 85.0363 17.3795C85.1051 18.2946 85.4044 19.1833 85.7453 19.945C86.4405 21.4986 87.6125 23.1919 89.043 24.7506L91.2533 22.7222ZM88.3174 16.1614L90.3458 18.3717C89.9929 18.6956 89.6079 18.8429 89.3209 18.8986C89.0554 18.9502 88.8814 18.9242 88.8511 18.9193C88.8125 18.913 88.9888 18.9433 89.3965 19.1695C90.183 19.6058 91.2765 20.4611 92.3923 21.6769L94.6026 19.6485L96.8129 17.62C95.3824 16.0613 93.7957 14.7486 92.3074 13.9228C91.5776 13.518 90.7179 13.1437 89.812 12.9967C88.9486 12.8566 87.4877 12.851 86.2889 13.9511L88.3174 16.1614ZM94.6026 19.6485L92.3923 21.6769C93.5081 22.8928 94.2666 24.0556 94.634 24.8765C94.8244 25.302 94.8395 25.4803 94.8365 25.4413C94.8342 25.4107 94.8232 25.2351 94.8973 24.975C94.9775 24.6938 95.1571 24.3229 95.5101 23.999L97.5385 26.2093L99.567 28.4196C100.766 27.3195 100.885 25.8634 100.82 24.9912C100.751 24.0761 100.451 23.1874 100.111 22.4257C99.4154 20.8721 98.2434 19.1788 96.8129 17.62L94.6026 19.6485ZM97.5385 26.2093L95.5101 23.999C95.8631 23.6751 96.248 23.5278 96.5351 23.472C96.8005 23.4205 96.9745 23.4465 97.0048 23.4514C97.0434 23.4577 96.8671 23.4274 96.4594 23.2012C95.673 22.7649 94.5794 21.9096 93.4636 20.6938L91.2533 22.7222L89.043 24.7506C90.4735 26.3094 92.0602 27.6221 93.5486 28.4478C94.2783 28.8527 95.138 29.227 96.0439 29.374C96.9073 29.5141 98.3683 29.5197 99.567 28.4196L97.5385 26.2093Z" fill="#145565" mask="url(#m1-1)"/>
+        <mask id="m1-2" fill="white"><ellipse cx="78.5997" cy="6.5192" rx="2.27297" ry="6.81891" transform="rotate(136.657 78.5997 6.5192)"/></mask>
+        <path d="M76.9466 8.07928L79.1284 6.0202C77.9957 4.82002 77.2211 3.66794 76.8423 2.85223C76.646 2.42938 76.6284 2.25136 76.6319 2.29028C76.6346 2.32088 76.6481 2.49625 76.5776 2.75735C76.5014 3.03963 76.3269 3.41304 75.9785 3.74185L73.9194 1.56006L71.8604 -0.621729C70.6771 0.494995 70.5779 1.95257 70.6557 2.82378C70.7373 3.73787 71.0489 4.62227 71.4004 5.37917C72.1172 6.92294 73.3127 8.59968 74.7648 10.1384L76.9466 8.07928ZM73.9194 1.56006L75.9785 3.74185C75.6301 4.07066 75.2472 4.22326 74.961 4.28304C74.6963 4.33833 74.522 4.31471 74.4916 4.31022C74.4529 4.3045 74.6297 4.33231 75.0404 4.55278C75.8329 4.97808 76.9382 5.81802 78.0709 7.01821L80.2527 4.95913L82.4345 2.90006C80.9824 1.36138 79.3776 0.0709846 77.8778 -0.733929C77.1425 -1.12857 76.2776 -1.49085 75.3698 -1.62517C74.5045 -1.75319 73.0436 -1.73845 71.8604 -0.621729L73.9194 1.56006ZM80.2527 4.95913L78.0709 7.01821C79.2036 8.21839 79.9782 9.37046 80.357 10.1862C80.5533 10.609 80.5709 10.787 80.5674 10.7481C80.5647 10.7175 80.5512 10.5422 80.6217 10.2811C80.6979 9.99878 80.8724 9.62537 81.2208 9.29656L83.2799 11.4783L85.339 13.6601C86.5222 12.5434 86.6214 11.0858 86.5436 10.2146C86.462 9.30054 86.1504 8.41614 85.7989 7.65924C85.0821 6.11546 83.8866 4.43873 82.4345 2.90006L80.2527 4.95913ZM83.2799 11.4783L81.2208 9.29656C81.5692 8.96774 81.9521 8.81515 82.2383 8.75537C82.503 8.70008 82.6773 8.72369 82.7077 8.72819C82.7464 8.73391 82.5697 8.7061 82.1589 8.48563C81.3664 8.06032 80.2611 7.22038 79.1284 6.0202L76.9466 8.07928L74.7648 10.1384C76.217 11.677 77.8218 12.9674 79.3215 13.7723C80.0568 14.167 80.9217 14.5293 81.8296 14.6636C82.6948 14.7916 84.1557 14.7769 85.339 13.6601L83.2799 11.4783Z" fill="#145565" mask="url(#m1-2)"/>
+        <path d="M5.28606 41.579C6.49448 35.1625 9.06971 29.0813 12.8368 23.7484C16.604 18.4154 21.4747 13.9557 27.1183 10.6722C32.7618 7.38865 39.046 5.3582 45.5438 4.71874C52.0417 4.07928 58.6011 4.8458 64.7765 6.96623" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M68.959 91.3619C63.3307 93.9417 57.2351 95.3457 51.0454 95.488C44.8556 95.6302 38.702 94.5077 32.9611 92.1892" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M93.9496 38.2237C94.9788 42.0645 95.5 46.0237 95.5 50" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="label">Spark</div>
+      <div class="range">$5 – $99</div>
+    </div>
+    <div class="tier" data-tier="1">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g clip-path="url(#c1)">
+        <path d="M90.7391 75.9061C95.7957 67.7673 98.311 58.3316 97.9693 48.783" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M59.1384 3.0495C50.7232 1.288 41.9878 1.75005 33.8103 4.38919C25.6327 7.02834 18.301 11.7516 12.5522 18.0842" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M74.3125 15.6065C78.6067 12.9291 85.1559 20.8738 87.0515 23.965C87.3392 24.4341 90.2421 29.4502 87.322 28.9559C84.5418 28.4852 79.2391 17.6296 76.219 19.7597C74.9613 20.6468 80.8156 29.4228 81.0866 32.3099C81.4305 35.9714 78.2998 40.2471 73.7408 40.3877C68.7956 40.5403 61.0515 30.323 61.5344 25.565C61.6507 24.4191 63.6579 23.3054 64.8044 24.4678C66.6329 26.3216 69.9121 38.452 74.6169 36.6274C82.8214 33.4457 65.6898 20.9828 74.3125 15.6065Z" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="75.5" cy="28.5" r="20" stroke="#145565" stroke-width="3"/>
+        <path d="M62.1213 15L66.1213 19" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M85 37.8787L89 41.8787" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <rect x="22.6968" y="83.2245" width="42.6264" height="20.0595" rx="8.14732" transform="rotate(-45 22.6968 83.2245)" stroke="#145565" stroke-width="3"/>
+        <line x1="37.4295" y1="68.6296" x2="50.8547" y2="82.0548" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M47.3178 94.4319L75.8073 94.4762C80.307 94.4832 83.9603 90.8412 83.9673 86.3415L83.9732 82.5767C83.9801 78.077 80.3381 74.4237 75.8385 74.4167L65.7836 74.4011" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M62.0903 78.9351L62.0903 93.7077" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M23 28.5C28.7003 28.5 33.8055 29.1615 37.4375 30.1992C39.2634 30.7209 40.6319 31.3143 41.5098 31.9072C42.44 32.5356 42.5 32.9328 42.5 33C42.5 33.0672 42.44 33.4644 41.5098 34.0928C40.6319 34.6857 39.2634 35.2791 37.4375 35.8008C33.8055 36.8385 28.7003 37.5 23 37.5C17.2997 37.5 12.1945 36.8385 8.5625 35.8008C6.73661 35.2791 5.36806 34.6857 4.49023 34.0928C3.56004 33.4644 3.5 33.0672 3.5 33C3.5 32.9328 3.56004 32.5356 4.49023 31.9072C5.36806 31.3143 6.73661 30.7209 8.5625 30.1992C12.1945 29.1615 17.2997 28.5 23 28.5Z" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M42.3936 44.4658C42.3936 47.8652 33.575 50.621 22.6968 50.621C11.8186 50.621 3 47.8652 3 44.4658" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M39.9315 49.39V58.6228" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M25.7744 92.4767H18.1931C11.8418 92.4767 6.69312 87.328 6.69312 80.9767V49.39" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 34.6174V43.2347" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M42.3936 34.6174V44.4658" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M7.30872 58.6228C11.1611 59.9746 13.8237 60.5959 20.8503 61.0849V74.6264C15.6496 74.7141 12.6708 73.8565 7.30872 71.5488" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 43V48" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M17 45V48" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <defs><clipPath id="c1"><rect width="100" height="100" fill="white"/></clipPath></defs>
+      </svg>
+      <div class="label">Sustain</div>
+      <div class="range">$100 – $499</div>
+    </div>
+    <div class="tier" data-tier="2">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M68.7284 71.5708L76.3333 78.0221C80.0038 77.3387 81.6671 76.5241 83.3951 73.7213L79.5926 64.0443" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M90.9999 92L81.2222 78.5598" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M38.8518 44.1528L60.5802 74.2589C65.8402 72.5992 68.8249 71.1843 74.1605 67.8076C79.496 64.4309 81.6725 61.8342 85.0246 57.0554L63.8395 27.4869" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M39.395 26.9493L46.5 36.5854" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M61 39.5L62.2099 41.4648C61 43.5 56.5 46.5 54.0617 46.8408L52.5 44.5" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M55 32C53 34.5 50.5636 35.9795 47 37" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M54.7643 31.6397L47.5432 22.1108" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M29.5793 62.5172C30.4073 62.5177 31.0792 63.1892 31.0793 64.0172V69.4078H36.8372C37.6652 69.4082 38.3371 70.0797 38.3372 70.9078V76.9371C38.3368 77.765 37.665 78.4367 36.8372 78.4371H31.0793V83.8268C31.0792 84.6548 30.4073 85.3263 29.5793 85.3268H22.3215C21.4932 85.3268 20.8217 84.6551 20.8215 83.8268V78.4371H15.0627C14.2347 78.4369 13.5631 77.7651 13.5627 76.9371V70.9078C13.5628 70.0795 14.2353 69.4078 15.0637 69.4078H20.8215V64.0172C20.8216 63.1889 21.4932 62.5172 22.3215 62.5172H29.5793ZM23.8215 70.9078C23.8215 71.27 23.6925 71.6027 23.4788 71.8619C23.4046 71.9518 23.3178 72.0307 23.2249 72.1012C22.9734 72.292 22.6614 72.4076 22.3215 72.4078L22.3206 72.4069V72.4078H16.5627V75.4371H22.302C22.3082 75.437 22.3153 75.4362 22.3215 75.4362C23.1494 75.4366 23.8213 76.1083 23.8215 76.9362V82.3268H28.0793V76.9362C28.0796 76.108 28.7511 75.4362 29.5793 75.4362C29.5857 75.4362 29.5925 75.4371 29.5989 75.4371H35.3372V72.4078H29.5793C28.751 72.4078 28.0795 71.7361 28.0793 70.9078C28.0794 70.8397 28.0852 70.7724 28.094 70.7067C28.0849 70.6399 28.0794 70.5718 28.0793 70.5026V65.5172H23.8215V70.9078Z" fill="#145565"/>
+        <path d="M24.1432 29.6374C13.321 29.6374 3.00046 30.7126 3 34.5655C2.99954 38.4183 8.4321 41.4648 27.9877 41.4648" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 53.2922C3.64556 53.4789 4.27538 53.6731 4.90123 53.8364M40.4815 55.4426C31.3827 57.2705 19.2963 57.593 4.90123 53.8364M4.90123 53.8364V86.1938C11.74 90.3349 17.2593 92 25.8148 92C34.3704 92 40.3148 91.7148 48.6296 87.1615V66.8399" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 53.2922V35.0135" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M33.9633 12.434C26.6522 17.4202 24.7294 23.7239 25.8151 25.3366C26.9009 26.9494 35.8265 24.2698 42.1114 19.9605C48.3964 15.6512 50.8031 9.88188 49.7163 8.67072C48.6296 7.45956 41.2743 7.44773 33.9633 12.434Z" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M52 27.8635C57.8474 25.5048 62.8277 25.721 63.7317 26.6779C64.8881 27.9019 62.3271 33.7326 55.6395 38.0878C48.9519 42.4429 39.4545 45.151 38.2992 43.5211C37.3304 42.1543 38.6128 37.4536 43.6397 33" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M61.1235 39.4965C65.9466 37.7953 69.8686 38.0511 70.6392 38.9099C71.726 40.121 69.3192 45.8903 63.0343 50.1996C56.7493 54.5089 47.8237 57.1886 46.738 55.5757C45.7947 54.1746 47.1223 49.2329 52.2811 44.6904" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M52.17 12.0294C53.2568 13.2405 50.85 19.0098 44.5651 23.3191C38.2801 27.6284 29.3546 30.3081 28.2688 28.6952" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M49.1917 58.9344C50.2774 60.5472 59.203 57.8676 65.4879 53.5583C71.7729 49.249 74.1797 43.4797 73.0929 42.2685" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M27.9877 28.5621L25.8148 25.3365" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M52.4321 12.4339L50.2593 9.20825" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20.3232 16.1219C17.5851 18.4574 15.1275 21.1029 12.9996 24.0051" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M47.0332 97.8706C56.8953 98.6079 66.7355 96.1818 75.1246 90.9446" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+        <path d="M93.2134 69.8798C95.6271 64.2705 96.9123 58.2409 96.9957 52.135C97.079 46.0291 95.959 39.9665 93.6994 34.2935C91.4398 28.6205 88.0849 23.4481 83.8264 19.0716C79.5678 14.6951 74.489 11.2003 68.8797 8.7866" stroke="#145565" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="label">Transform</div>
+      <div class="range">$500+</div>
+    </div>
+  </div>
+
+  <div class="amount-display">
+    <div class="amount-label">Your donation</div>
+    <div class="amount-value"><span class="currency">$</span><span id="amount">50</span></div>
+    <div class="frequency" role="group" aria-label="Donation frequency">
+      <button type="button" data-freq="once" class="active">One-off</button>
+      <button type="button" data-freq="monthly">Monthly</button>
+    </div>
+  </div>
+
+  <div class="slider-wrap">
+    <input type="range" id="slider" min="5" max="2000" step="5" value="50" aria-label="Donation amount" />
+    <div class="slider-bounds">
+      <span>$5</span>
+      <span>$2,000</span>
+    </div>
+  </div>
+
+  <div class="presets" role="group" aria-label="Quick amount presets">
+    <button type="button" class="preset" data-amount="25">$25</button>
+    <button type="button" class="preset" data-amount="50">$50</button>
+    <button type="button" class="preset" data-amount="100">$100</button>
+    <button type="button" class="preset" data-amount="250">$250</button>
+    <button type="button" class="preset" data-amount="500">$500</button>
+    <button type="button" class="preset" data-amount="1000">$1,000</button>
+  </div>
+
+  <a id="donate" class="donate-btn" href="https://effectivealtruism.org.au/donate/?amount=50" target="_blank" rel="noopener">
+    Donate $50
+  </a>
+
+  <p class="footnote">Donations are tax-deductible in Australia.</p>
+</main>
+
+<script>
+  (function () {
+    const slider   = document.getElementById('slider');
+    const amountEl = document.getElementById('amount');
+    const donate   = document.getElementById('donate');
+    const tiers    = document.querySelectorAll('.tier');
+    const presets  = document.querySelectorAll('.preset');
+    const freqBtns = document.querySelectorAll('.frequency button');
+
+    let frequency = 'once';
+
+    const formatCurrency = (n) => n.toLocaleString('en-AU');
+
+    function activeTierIndex(amount) {
+      if (amount < 100)  return 0;
+      if (amount < 500)  return 1;
+      return 2;
+    }
+
+    function update(amount) {
+      const value = Math.max(parseInt(slider.min, 10), parseInt(amount, 10) || 0);
+      amountEl.textContent = formatCurrency(value);
+      donate.textContent = `Donate $${formatCurrency(value)}${frequency === 'monthly' ? '/month' : ''}`;
+      const params = new URLSearchParams({ amount: String(value) });
+      if (frequency === 'monthly') params.set('frequency', 'monthly');
+      donate.href = `https://effectivealtruism.org.au/donate/?${params.toString()}`;
+
+      const tierIdx = activeTierIndex(value);
+      tiers.forEach((t, i) => t.classList.toggle('active', i === tierIdx));
+
+      presets.forEach((p) =>
+        p.classList.toggle('active', parseInt(p.dataset.amount, 10) === value)
+      );
+    }
+
+    slider.addEventListener('input', (e) => update(e.target.value));
+
+    presets.forEach((p) => {
+      p.addEventListener('click', () => {
+        const v = parseInt(p.dataset.amount, 10);
+        slider.value = Math.min(parseInt(slider.max, 10), v);
+        update(v);
+      });
+    });
+
+    freqBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        freqBtns.forEach((b) => b.classList.toggle('active', b === btn));
+        frequency = btn.dataset.freq;
+        update(slider.value);
+      });
+    });
+
+    update(slider.value);
+  })();
+</script>
+
+</body>
+</html>
