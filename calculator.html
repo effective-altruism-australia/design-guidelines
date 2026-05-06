@@ -101,19 +101,34 @@
   }
 
   .tiers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
     margin-bottom: 28px;
   }
 
   .tier {
+    flex: 1 1 0;
+    min-width: 0;
     background: var(--bronze-100);
     border: 2px solid transparent;
     border-radius: var(--radius-sm);
     padding: 16px 8px;
     text-align: center;
     transition: all 0.3s var(--ease);
+  }
+
+  .tier-or {
+    flex: 0 0 auto;
+    align-self: center;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--grey-500);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 2px;
+    user-select: none;
   }
 
   .tier svg {
@@ -388,6 +403,7 @@
       <div class="label">Spark</div>
       <div class="range">$5 – $99</div>
     </div>
+    <div class="tier-or" aria-hidden="true">or</div>
     <div class="tier" data-tier="1">
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <g clip-path="url(#c1)">
@@ -416,6 +432,7 @@
       <div class="label">Sustain</div>
       <div class="range">$100 – $499</div>
     </div>
+    <div class="tier-or" aria-hidden="true">or</div>
     <div class="tier" data-tier="2">
       <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M68.7284 71.5708L76.3333 78.0221C80.0038 77.3387 81.6671 76.5241 83.3951 73.7213L79.5926 64.0443" stroke="#145565" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
